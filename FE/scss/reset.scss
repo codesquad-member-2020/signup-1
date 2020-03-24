@@ -128,7 +128,8 @@ table {
 }
 
 input,
-textarea {
+textarea,
+select {
   &:focus {
     outline: none;
   }
