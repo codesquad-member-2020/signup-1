@@ -1,4 +1,6 @@
 package com.codesquad.team1.signup.domain;
 
-public class UserDto {
+public enum Gender {
+    여자,
+    남자;
 }
