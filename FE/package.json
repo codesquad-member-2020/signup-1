@@ -1,0 +1,22 @@
+{
+  "name": "project-signup",
+  "version": "1.0.0",
+  "description": "회원가입 프로젝트 - 1팀",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codesquad-memeber-2020/signup-1.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/codesquad-memeber-2020/signup-1/issues"
+  },
+  "homepage": "https://github.com/codesquad-memeber-2020/signup-1#readme",
+  "dependencies": {
+    "node-sass": "^4.13.1"
+  }
+}
