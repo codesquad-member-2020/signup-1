@@ -2,16 +2,16 @@ name: Push Container to Heroku
 
 on:
   push:
-    branches: [ master, develop ]
+    branches: [master, develop]
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
-    - name: Login to Heroku Container registry
-      env: 
-        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-      run: heroku container:login
-    - name: Run a one-line script
-      run: echo 헤로쿠에 로그인을 해봅시다.
+      - uses: actions/checkout@v1
+      - name: Login to Heroku Container registry
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_TOKEN }}
+        run: heroku container:login
+      - name: Run a one-line script
+        run: echo 헤로쿠에 로그인을 해봅시다.
