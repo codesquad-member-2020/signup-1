@@ -13,4 +13,4 @@ jobs:
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_TOKEN }}
         if: github.ref == 'refs/heads/develop' && job.status == 'success'
-        run: git subtree push --prefix BE https://heroku:$HEROKU_API_TOKEN@git.heroku.com/codesqaud-team1-sign-up.git master --force
+        run: git subtree push --prefix BE https://heroku:$HEROKU_API_TOKEN@git.heroku.com/codesqaud-team1-sign-up.git master
