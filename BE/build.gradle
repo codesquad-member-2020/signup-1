@@ -28,6 +28,7 @@ dependencies {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
     testImplementation 'org.assertj:assertj-core:3.15.0'
+    implementation 'com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.2'
 }
 
 test {
