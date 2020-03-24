@@ -16,8 +16,8 @@ jobs:
       - name: Build and push
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_TOKEN }}
-        run: heroku container:push -a sign-up web
+        run: heroku container:push -a codesquad-team1-sign-up web
       - name: Release
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_TOKEN }}
-        run: heroku container:release -a sign-up web
+        run: heroku container:release -a codesquad-team1-sign-up web
