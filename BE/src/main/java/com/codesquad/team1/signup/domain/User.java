@@ -7,7 +7,7 @@ import java.time.LocalDate;
 
 @Table("USERS")
 public class User {
-    
+
     @Id
     private int id;
 
