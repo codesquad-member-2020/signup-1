@@ -13,5 +13,11 @@ jobs:
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_TOKEN }}
         run: heroku container:login
-      - name: Run a one-line script
-        run: echo 헤로쿠에 로그인을 해봅시다.
+      - name: Build and push
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_TOKEN }}
+        run: heroku container:push -a sign-up web
+      - name: Release
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_TOKEN }}
+        run: heroku container:release -a sign-up web
