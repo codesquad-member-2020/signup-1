@@ -13,11 +13,15 @@ public class ApiUserController {
 
     private static final Logger log = LoggerFactory.getLogger(ApiUserController.class);
 
-    @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    public ApiUserController(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
     @GetMapping("")
-    public User test() {
-        return userRepository.findById(1).get();
+    public Iterable<User> test() {
+        return userRepository.findAll();
     }
 }
