@@ -1,4 +1,4 @@
-package com.codesquad.team1.signup.domain;
+package com.codesquad.team1.signup.repository;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
