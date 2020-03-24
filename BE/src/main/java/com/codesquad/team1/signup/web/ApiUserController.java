@@ -15,7 +15,6 @@ public class ApiUserController {
 
     private UserRepository userRepository;
 
-    @Autowired
     public ApiUserController(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
