@@ -28,143 +28,144 @@ div.wrap {
     color: $highlight;
     text-align: center;
   }
-  form {
+}
+
+form {
+  width: 100%;
+  > div + div {
+    margin-top: $input-gap * 2;
+  }
+  label {
+    color: $grey;
+    font-weight: bold;
+  }
+  input,
+  select {
+    font-size: 1rem;
+    box-sizing: border-box;
+    border: 1px solid $light-grey;
+    border-radius: $round-offset;
+    background-color: $white;
     width: 100%;
-    > div {
-      & + div {
-        margin-top: $input-gap * 2;
-      }
-      label {
-        color: $grey;
-        font-weight: bold;
-      }
-      input,
-      select {
-        font-size: 1rem;
-        box-sizing: border-box;
-        border: 1px solid $light-grey;
-        border-radius: $round-offset;
-        background-color: $white;
-        width: 100%;
-        height: $input-height;
-        padding: 0 $input-padding;
-        margin-top: $input-gap;
-        transition: border 0.2s ease, border-radius 0.2s ease;
-      }
-      input {
-        &:focus {
-          border: 2px solid $highlight;
-        }
-        &::placeholder {
-          color: $placeholder-grey;
-        }
-      }
-      select {
-        @include appearance-none();
-      }
-      span.error-msg {
-        margin-top: 12px;
-        font-size: 0.875rem;
-        display: block;
-        height: 20px;
-      }
-      .error {
-        color: $red;
-      }
+    height: $input-height;
+    padding: 0 $input-padding;
+    margin-top: $input-gap;
+    transition: border 0.2s ease, border-radius 0.2s ease;
+  }
+  input {
+    &:focus {
+      border: 2px solid $highlight;
     }
-    div.birthday-wrap {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1rem;
-      input,
-      div.month-select-wrap {
-        width: 100%;
-      }
+    &::placeholder {
+      color: $placeholder-grey;
     }
-    div.month-select-wrap,
-    div.gender-select-wrap {
-      position: relative;
-      display: flex;
-      align-items: center;
+  }
+  select {
+    @include appearance-none();
+  }
+  span.error-msg {
+    margin-top: 12px;
+    font-size: 0.875rem;
+    display: block;
+    height: 20px;
+  }
+}
+
+div.birthday-wrap {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  input,
+  div.month-select-wrap {
+    width: 100%;
+  }
+}
+
+div.month-select-wrap,
+div.gender-select-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+div.interest-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  box-sizing: border-box;
+  border: 1px solid $light-grey;
+  border-radius: $round-offset;
+  background-color: $white;
+  width: 100%;
+  height: $input-height;
+  margin-top: $input-gap;
+  padding: 0 $input-padding;
+  font-size: 1rem;
+  transition: border 0.2s ease, border-radius 0.2s ease;
+  .focus {
+    border: 2px solid $highlight;
+  }
+  div.interest-chip {
+    display: flex;
+    align-items: center;
+    background-color: $bg-grey;
+    border: 1px solid $light-grey;
+    border-radius: $round-offset;
+    height: 20px;
+    margin-right: 8px;
+    padding: 0.5rem 0.5rem 0.5rem 0.7rem;
+    span {
+      margin-right: 4px;
+      color: $grey;
     }
-    div.interest-wrap {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      box-sizing: border-box;
-      border: 1px solid $light-grey;
-      border-radius: $round-offset;
-      background-color: $white;
-      width: 100%;
-      height: $input-height;
-      margin-top: $input-gap;
-      padding: 0 $input-padding;
-      font-size: 1rem;
-      transition: border 0.2s ease, border-radius 0.2s ease;
-      .focus {
-        border: 2px solid $highlight;
-      }
-      div.interest-chip {
-        display: flex;
-        align-items: center;
-        background-color: $bg-grey;
-        border: 1px solid $light-grey;
-        border-radius: $round-offset;
-        height: 20px;
-        margin-right: 8px;
-        padding: 0.5rem 0.5rem 0.5rem 0.7rem;
-        span {
-          margin-right: 4px;
-          color: $grey;
-        }
-      }
-      input {
-        flex: 1 1 auto;
-        width: 1px;
-        height: 100%;
-        margin: 0;
-        padding: 0;
-        border: transparent;
-        background-color: transparent;
-      }
-    }
-    div.form-terms {
-      display: flex;
-      align-items: center;
-      margin-top: 1rem;
-      label {
-        margin-right: 8px;
-      }
-      input[type="checkbox"] {
-        width: auto;
-        height: auto;
-        zoom: 1.5;
-        margin: 0;
-        padding: 0;
-        transition: none;
-      }
-    }
-    div.btn-wrap {
-      display: flex;
-      margin-bottom: 80px;
-      button {
-        cursor: pointer;
-        flex-grow: 1;
-        font-size: 1rem;
-        height: $input-height;
-        border: none;
-        border-radius: $round-offset;
-        background-color: $highlight;
-        color: $white;
-        font-size: 1.125rem;
-      }
-      .reset-btn {
-        margin-right: 0.5rem;
-      }
-      .submit-btn {
-        margin-left: 0.5rem;
-      }
-    }
+  }
+  input {
+    flex: 1 1 auto;
+    width: 1px;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    border: transparent;
+    background-color: transparent;
+  }
+}
+
+div.form-terms {
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+  label {
+    margin-right: 8px;
+  }
+  input[type="checkbox"] {
+    width: auto;
+    height: auto;
+    zoom: 1.5;
+    margin: 0;
+    padding: 0;
+    transition: none;
+  }
+}
+
+div.btn-wrap {
+  display: flex;
+  margin-bottom: 80px;
+  button {
+    cursor: pointer;
+    flex-grow: 1;
+    font-size: 1rem;
+    height: $input-height;
+    border: none;
+    border-radius: $round-offset;
+    background-color: $highlight;
+    color: $white;
+    font-size: 1.125rem;
+  }
+  .reset-btn {
+    margin-right: 0.5rem;
+  }
+  .submit-btn {
+    margin-left: 0.5rem;
   }
 }
 
@@ -182,4 +183,8 @@ div.wrap {
     transform: translateY(10%);
     right: 10px;
   }
+}
+
+.error {
+  color: $red;
 }
