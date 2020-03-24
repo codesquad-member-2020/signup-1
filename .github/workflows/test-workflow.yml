@@ -2,22 +2,15 @@ name: Push Container to Heroku
 
 on:
   push:
-    branches: [master, develop]
+    branches: [develop]
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - name: Login to Heroku Container registry
-        env:
-          HEROKU_API_KEY: ${{ secrets.HEROKU_API_TOKEN }}
-        run: heroku container:login
       - name: Build and push
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_TOKEN }}
-        run: heroku container:push -a codesquad-team1-sign-up web
-      - name: Release
-        env:
-          HEROKU_API_KEY: ${{ secrets.HEROKU_API_TOKEN }}
-        run: heroku container:release -a codesquad-team1-sign-up web
+        if: github.ref == 'refs/heads/develop' && job.status == 'success'
+        run: git subtree push --prefix BE https://heroku:$HEROKU_API_TOKEN@git.heroku.com/codesqaud-team1-sign-up.git master --force
