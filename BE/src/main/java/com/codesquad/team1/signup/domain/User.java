@@ -1,7 +1,6 @@
 package com.codesquad.team1.signup.domain;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
 import java.time.LocalDate;
@@ -10,12 +9,19 @@ import java.time.LocalDate;
 public class User {
     @Id
     private int id;
+
     private String userId;
+
     private String password;
+
     private String name;
+
     private LocalDate birthday;
+
     private Gender gender;
+
     private String email;
+
     private String phoneNumber;
 
     public int getId() {
