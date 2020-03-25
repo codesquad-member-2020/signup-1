@@ -1,14 +1,20 @@
 export const PATTERN = {
-  userId: "^[a-z0-9-_]{5,20}$",
-  password: "^(?=.*[A-Za-z])(?=.*d)(?=.*[!@#$%^&*_+~])[A-Za-zd!@#$%^&*_+~]{8,16}$",
-  email: "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$",
-  phoneNumber: "^(010)(d{7,8})$",
-  year: "^(0-9)$",
+  userId: /^[a-z0-9-_]{5,20}$/,
+  password: {
+    all: /^(?=.*[A-Za-z])(?=.*d)(?=.*[!@#$%^&*_+~])[A-Za-zd!@#$%^&*_+~]{8,16}$/,
+    upperCase: /(.*[A-Z])/,
+    number: /(.*[0-9])/,
+    sign: /(.*[!@#$%^&*_+~])/,
+  },
+  email: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/,
+  phoneNumber: /^(010)(d{7,8})$/,
+  year: /^(0-9)$/,
 };
 
 export const LIMITED_LENGTH = {
   userId: 20,
-  password: 16,
+  password_min: 8,
+  password_max: 16,
   year: 4,
 };
 
