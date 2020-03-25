@@ -6,13 +6,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.security.InvalidParameterException;
+import java.util.Optional;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/api/users")
 public class ApiUserController {
 
     private static final Logger log = LoggerFactory.getLogger(ApiUserController.class);
+    private static final String SESSION_USER_KEY = "sessionedUser";
 
     private UserRepository userRepository;
 
@@ -22,20 +25,17 @@ public class ApiUserController {
 
     @GetMapping("/duplicate/id/{userId}")
     public boolean isDuplicatedId(@PathVariable String userId) {
-        long queryResult = userRepository.findByUserId(userId);
-        return queryResult > 0;
+        return userRepository.countByUserId(userId) > 0;
     }
 
     @GetMapping("/duplicate/email/{email}")
     public boolean isDuplicatedEmail(@PathVariable String email) {
-        long queryResult = userRepository.findByEmail(email);
-        return queryResult > 0;
+        return userRepository.countByEmail(email) > 0;
     }
 
     @GetMapping("/duplicate/phone-number/{phoneNumber}")
     public boolean isDuplicatedPhoneNumber(@PathVariable String phoneNumber) {
-        long queryResult = userRepository.findByPhoneNumber(phoneNumber);
-        return queryResult > 0;
+        return userRepository.countByPhoneNumber(phoneNumber) > 0;
     }
 
     @PostMapping("/create")
@@ -46,4 +46,24 @@ public class ApiUserController {
         throw new InvalidParameterException("Validation을 통과하지 못한 값 입니다.");
     }
 
+    @PostMapping("/login")
+    public boolean login(@RequestParam String userId, @RequestParam String password, HttpSession session) {
+        Optional<User> optionalUser = userRepository.findByUserId(userId);
+        if (!optionalUser.isPresent())
+            return false;
+
+        User user = optionalUser.get();
+        if (!user.matchPassword(password))
+            return false;
+
+        session.setAttribute(SESSION_USER_KEY, user);
+        return true;
+    }
+
+    @GetMapping("/logout")
+    public boolean logout(HttpSession session) {
+        session.removeAttribute(SESSION_USER_KEY);
+        session.invalidate();
+        return true;
+    }
 }
