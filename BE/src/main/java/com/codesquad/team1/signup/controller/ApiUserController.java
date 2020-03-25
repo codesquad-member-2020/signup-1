@@ -33,4 +33,10 @@ public class ApiUserController {
         long queryResult = userRepository.findByEmail(email);
         return queryResult > 0;
     }
+
+    @GetMapping("/duplicate/phone-number/{phoneNumber}")
+    public boolean isDuplicatedPhoneNumber(@PathVariable String phoneNumber) {
+        long queryResult = userRepository.findByPhoneNumber(phoneNumber);
+        return queryResult > 0;
+    }
 }
