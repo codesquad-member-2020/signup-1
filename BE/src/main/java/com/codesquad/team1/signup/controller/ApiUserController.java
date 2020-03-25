@@ -24,7 +24,7 @@ public class ApiUserController {
 
     @GetMapping("/duplicate/id/{userId}")
     public boolean isDuplicatedId(@PathVariable String userId) {
-        Optional<String> queryResult = userRepository.findByUserId(userId);
-        return queryResult.isPresent();
+        long queryResult = userRepository.findByUserId(userId);
+        return queryResult > 0;
     }
 }
