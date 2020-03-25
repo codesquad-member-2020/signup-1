@@ -5,12 +5,12 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface UserRepository extends CrudRepository<User, Integer> {
 
-    @Query("select count(*) from USERS where user_id = :userId")
+    @Query("select count(*) from USERS where binary user_id = :userId")
     long findByUserId(String userId);
 
-    @Query("select count(*) from USERS where email = :email")
+    @Query("select count(*) from USERS where binary email = :email")
     long findByEmail(String email);
 
-    @Query("select count(*) from USERS where phone_number = :phoneNumber")
+    @Query("select count(*) from USERS where binary phone_number = :phoneNumber")
     long findByPhoneNumber(String phoneNumber);
 }
