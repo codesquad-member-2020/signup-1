@@ -27,4 +27,10 @@ public class ApiUserController {
         long queryResult = userRepository.findByUserId(userId);
         return queryResult > 0;
     }
+
+    @GetMapping("/duplicate/email/{email}")
+    public boolean isDuplicatedEmail(@PathVariable String email) {
+        long queryResult = userRepository.findByEmail(email);
+        return queryResult > 0;
+    }
 }
