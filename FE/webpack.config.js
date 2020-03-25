@@ -4,7 +4,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   mode: "development",
-  entry: ["./src/signup.js", "./scss/main.scss"],
+  entry: ["./src/main.js", "./scss/main.scss"],
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "bundle.js",
@@ -15,7 +15,7 @@ module.exports = {
       minify: {
         collapseWhitespace: true,
       },
-      template: "./src/signup.html",
+      template: "./src/home.html",
     }),
   ],
   devServer: {
