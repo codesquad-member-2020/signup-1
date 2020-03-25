@@ -6,9 +6,9 @@ export const PATTERN = {
     number: /(.*[0-9])/,
     sign: /(.*[!@#$%^&*_+~])/,
   },
-  email: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/,
-  phoneNumber: /^(010)(d{7,8})$/,
-  year: /^(0-9)$/,
+  email: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+  phoneNumber: /^(010)(\d{7,8})$/,
+  birthday: /^(0-9)$/,
 };
 
 export const LIMITED_LENGTH = {
@@ -49,3 +49,7 @@ export const TOGGLE_CLASS = {
   hidden: "hidden",
   disabled: "disabled",
 };
+
+export const NUM_KEY_CODE_ZERO = 48;
+
+export const NUM_KEY_CODE_NINE = 57;
