@@ -7,7 +7,7 @@ module.exports = {
   entry: { index: "./src/signup.js", signin: "./src/signin.js", home: "./src/home.js" },
   output: {
     path: path.resolve(__dirname, "dist"),
-    filename: "bundle.js",
+    filename: "dist/[name].bundle.js",
   },
   plugins: [
     new MiniCssExtractPlugin({ filename: "css/[name].css", chunkFilename: "css/[id].css" }),
