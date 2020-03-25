@@ -1,0 +1,21 @@
+.pass {
+  color: $highlight;
+}
+
+.error {
+  color: $red;
+}
+
+.focus {
+  border: 1px solid $highlight;
+}
+
+.hidden {
+  visibility: hidden;
+  opacity: 0;
+}
+
+.disabled {
+  pointer-events: none;
+  background-color: $grey;
+}
