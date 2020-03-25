@@ -4,6 +4,12 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
 
 import java.time.LocalDate;
+import java.util.regex.Matcher;
+
+import static com.codesquad.team1.signup.constants.ValidationConstants.USER_EMAIL_VALIDATION_PATTERN;
+import static com.codesquad.team1.signup.constants.ValidationConstants.USER_ID_VALIDATION_PATTERN;
+import static com.codesquad.team1.signup.constants.ValidationConstants.USER_PASSWORD_VALIDATION_PATTERN;
+import static com.codesquad.team1.signup.constants.ValidationConstants.USER_PHONE_NUMBER_VALIDATION_PATTERN;
 
 @Table("USERS")
 public class User {
@@ -12,17 +18,11 @@ public class User {
     private int id;
 
     private String userId;
-
     private String password;
-
     private String name;
-
     private LocalDate birthday;
-
     private Gender gender;
-
     private String email;
-
     private String phoneNumber;
 
     public int getId() {
@@ -55,5 +55,13 @@ public class User {
 
     public String getPhoneNumber() {
         return phoneNumber;
+    }
+
+    public boolean validate() {
+        Matcher idMatcher = USER_ID_VALIDATION_PATTERN.matcher(this.userId);
+        Matcher passwordMatcher = USER_PASSWORD_VALIDATION_PATTERN.matcher(this.password);
+        Matcher emailMatcher = USER_EMAIL_VALIDATION_PATTERN.matcher(this.email);
+        Matcher phoneNumberMatcher = USER_PHONE_NUMBER_VALIDATION_PATTERN.matcher(this.phoneNumber);
+        return idMatcher.matches() && passwordMatcher.matches() && emailMatcher.matches() && phoneNumberMatcher.matches();
     }
 }

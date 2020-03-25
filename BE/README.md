@@ -7,6 +7,12 @@
     + 간단한 DB 연결 테스트
 + feature/be/duplicatedId
     + 중복 ID 조회 API 기능 구현
+### User 관련 기능
+
+#### Validation 기능
+
+`Validation`을 처리할 `Pattern`의 모음인 `ValidationConstant` 클래스를 생성하였습니다.  
+추가적인 검증이 필요할 경우를 대비하여, USER_라는 Prefix를 두었습니다.
 
 ## Deployment
 
