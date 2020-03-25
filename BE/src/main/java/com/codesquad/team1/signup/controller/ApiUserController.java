@@ -1,12 +1,12 @@
 package com.codesquad.team1.signup.controller;
 
+import com.codesquad.team1.signup.repository.User;
 import com.codesquad.team1.signup.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.security.InvalidParameterException;
 
 @RestController
 @RequestMapping("/users")
@@ -37,4 +37,13 @@ public class ApiUserController {
         long queryResult = userRepository.findByPhoneNumber(phoneNumber);
         return queryResult > 0;
     }
+
+    @PostMapping("/create")
+    public User createUser(@RequestBody User user) {
+        if (user.validate()) {
+            return userRepository.save(user);
+        }
+        throw new InvalidParameterException("Validation을 통과하지 못한 값 입니다.");
+    }
+
 }

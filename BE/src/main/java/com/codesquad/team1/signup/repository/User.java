@@ -57,6 +57,34 @@ public class User {
         return phoneNumber;
     }
 
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setBirthday(LocalDate birthday) {
+        this.birthday = birthday;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
     public boolean validate() {
         Matcher idMatcher = USER_ID_VALIDATION_PATTERN.matcher(this.userId);
         Matcher passwordMatcher = USER_PASSWORD_VALIDATION_PATTERN.matcher(this.password);

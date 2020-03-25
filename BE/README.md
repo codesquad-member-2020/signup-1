@@ -14,6 +14,14 @@
 `Validation`을 처리할 `Pattern`의 모음인 `ValidationConstant` 클래스를 생성하였습니다.  
 추가적인 검증이 필요할 경우를 대비하여, USER_라는 Prefix를 두었습니다.
 
+#### Create 기능
+
+`api/user/create` 로 생성하며, json 형식의 데이터만 불러옵니다. validation 과정을 거치며 실패할 경우 Exception이 발생됩니다.
+현재는 Custom Exception을 따로 정의하지 않아서 500 에러가 리턴되나, 추후 수정할 예정입니다.
+
+정상 응답의 경우 생성된 User 객체가 리턴됩니다.
+비정상 응답의 경우 Error 정보가 리턴됩니다.
+
 ## Deployment
 
 - GitHub Actions를 이용한 heroku 자동 배포 시스템 구축
