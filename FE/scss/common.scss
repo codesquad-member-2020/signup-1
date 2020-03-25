@@ -36,6 +36,7 @@ form {
   display: flex;
   flex-direction: column;
   width: 100%;
+  margin-bottom: 80px;
   > div + div {
     margin-top: $input-gap * 2;
   }
@@ -153,12 +154,12 @@ div.btn-wrap {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: $button-gap;
-  margin-bottom: 80px;
 }
 
 button {
   cursor: pointer;
-  font-size: 1.125rem;
+  font-size: 1.25rem;
+  font-weight: bold;
   height: $input-height;
   border: none;
   background-color: $highlight;
