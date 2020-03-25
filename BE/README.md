@@ -17,6 +17,7 @@
 ## Deployment
 
 - GitHub Actions를 이용한 heroku 자동 배포 시스템 구축
+- master와 develop 환경이 분리되서 배포되도록 수정
 
 ## Database
 
