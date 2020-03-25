@@ -4,7 +4,7 @@ body {
 }
 
 body {
-  padding: 0 24px;
+  padding: 0 $wrap-padding;
   font-family: $sans-serif;
   background-color: $bg-grey;
   color: $black;
@@ -14,7 +14,7 @@ body {
 
 div.wrap {
   width: 100%;
-  max-width: 600px;
+  max-width: $wrap-max-width;
   min-height: 100%;
   display: flex;
   flex-direction: column;
@@ -40,21 +40,25 @@ form {
     font-weight: bold;
   }
   input,
-  select {
+  select,
+  div.interest-wrap,
+  div.interest-chip {
+    width: 100%;
     font-size: 1rem;
     box-sizing: border-box;
     border: 1px solid $light-grey;
-    border-radius: $round-offset;
     background-color: $white;
-    width: 100%;
+  }
+  input,
+  select {
     height: $input-height;
     padding: 0 $input-padding;
     margin-top: $input-gap;
-    transition: border 0.2s ease, border-radius 0.2s ease;
+    transition: border 0.2s ease;
   }
   input {
     &:focus {
-      border: 2px solid $highlight;
+      border: 1px solid $highlight;
     }
     &::placeholder {
       color: $placeholder-grey;
@@ -62,6 +66,7 @@ form {
   }
   select {
     @include appearance-none();
+    border-radius: 0;
   }
   span.error-msg {
     margin-top: 12px;
@@ -74,7 +79,7 @@ form {
 div.birthday-wrap {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
+  gap: $button-gap;
   input,
   div.month-select-wrap {
     width: 100%;
@@ -88,32 +93,25 @@ div.gender-select-wrap {
   align-items: center;
 }
 
-div.interest-wrap {
+div.interest-wrap,
+div.interest-chip {
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
-  box-sizing: border-box;
-  border: 1px solid $light-grey;
-  border-radius: $round-offset;
-  background-color: $white;
-  width: 100%;
-  height: $input-height;
+}
+
+div.interest-wrap {
+  flex-wrap: wrap;
+  align-content: space-between;
   margin-top: $input-gap;
-  padding: 0 $input-padding;
-  font-size: 1rem;
-  transition: border 0.2s ease, border-radius 0.2s ease;
-  .focus {
-    border: 2px solid $highlight;
-  }
+  padding: calc(#{$input-padding} - #{$chip-gap});
+  transition: border 0.2s ease;
   div.interest-chip {
-    display: flex;
-    align-items: center;
+    width: auto;
     background-color: $bg-grey;
-    border: 1px solid $light-grey;
-    border-radius: $round-offset;
-    height: 20px;
-    margin-right: 8px;
-    padding: 0.5rem 0.5rem 0.5rem 0.7rem;
+    border-radius: $chip-border-radius;
+    height: $chip-height;
+    margin: $chip-gap;
+    padding: 0 $chip-padding 0 8px;
     span {
       margin-right: 4px;
       color: $grey;
@@ -121,9 +119,9 @@ div.interest-wrap {
   }
   input {
     flex: 1 1 auto;
-    width: 1px;
-    height: 100%;
-    margin: 0;
+    width: 100px;
+    height: $chip-height;
+    margin: $chip-gap;
     padding: 0;
     border: transparent;
     background-color: transparent;
@@ -148,24 +146,18 @@ div.form-terms {
 }
 
 div.btn-wrap {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $button-gap;
   margin-bottom: 80px;
   button {
     cursor: pointer;
-    flex-grow: 1;
     font-size: 1rem;
     height: $input-height;
     border: none;
-    border-radius: $round-offset;
     background-color: $highlight;
     color: $white;
     font-size: 1.125rem;
-  }
-  .reset-btn {
-    margin-right: 0.5rem;
-  }
-  .submit-btn {
-    margin-left: 0.5rem;
   }
 }
 
@@ -173,18 +165,26 @@ div.btn-wrap {
   opacity: 0.56;
   &.md-18 {
     font-size: 18px;
-    transform: translateY(-5%);
-    cursor: pointer;
   }
   &.md-36 {
     font-size: 32px;
+  }
+  &.expand-more {
     pointer-events: none;
     position: absolute;
-    transform: translateY(10%);
+    transform: translateY(12%);
     right: 10px;
+  }
+  &.close {
+    transform: translateY(-5%);
+    cursor: pointer;
   }
 }
 
 .error {
   color: $red;
+}
+
+.focus {
+  border: 1px solid $highlight;
 }
