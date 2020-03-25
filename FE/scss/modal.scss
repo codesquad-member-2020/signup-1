@@ -1,0 +1,76 @@
+.modal-wrap {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $grey;
+  width: 100%;
+  min-height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  opacity: 1;
+  transition: opacity 0.2s ease;
+}
+
+.modal {
+  position: relative;
+  display: flex;
+  box-sizing: border-box;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 100%;
+  margin: 0 $wrap-padding;
+  max-width: $wrap-max-width;
+  background-color: $white;
+  padding: $modal-padding;
+}
+
+.modal-terms {
+  h2 {
+    font-size: 1.125rem;
+    font-weight: bold;
+    color: $black;
+    margin-bottom: $modal-gap;
+  }
+  &-text {
+    width: 100%;
+    max-height: $modal-textbox-height;
+    overflow-y: scroll;
+    overflow-wrap: break-word;
+    box-sizing: border-box;
+    margin-bottom: $modal-gap;
+    border: 1px solid $light-grey;
+    padding: $modal-gap;
+    font-size: 0.875rem;
+    line-height: 1.3;
+  }
+  i {
+    position: absolute;
+    top: 16px;
+    right: 20px;
+  }
+}
+
+.modal-reset,
+.modal-error {
+  h2 {
+    font-weight: normal;
+    font-size: 1.25rem;
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 60px;
+  }
+}
+
+.modal-reset {
+  .btn-wrap {
+    margin: 0;
+  }
+  .btn-cancel {
+    background-color: $grey;
+    &:hover {
+      @include lighten-color($grey);
+    }
+  }
+}
