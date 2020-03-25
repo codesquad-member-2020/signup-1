@@ -92,4 +92,8 @@ public class User {
         Matcher phoneNumberMatcher = USER_PHONE_NUMBER_VALIDATION_PATTERN.matcher(this.phoneNumber);
         return idMatcher.matches() && passwordMatcher.matches() && emailMatcher.matches() && phoneNumberMatcher.matches();
     }
+
+    public boolean matchPassword(String password) {
+        return this.password.equals(password);
+    }
 }
