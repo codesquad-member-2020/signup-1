@@ -22,6 +22,11 @@
 정상 응답의 경우 생성된 User 객체가 리턴됩니다.
 비정상 응답의 경우 Error 정보가 리턴됩니다.
 
+### FE BE 연동
+
+build된 파일을 직접 넣어줬는데, 그렇게 하지 않아도 되도록 할 예정입니다.
+template에 넣으면 css가 깨져서 일단 static에 넣어주었습니다.
+
 ## Deployment
 
 - GitHub Actions를 이용한 heroku 자동 배포 시스템 구축
