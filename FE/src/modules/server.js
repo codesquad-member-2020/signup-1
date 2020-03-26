@@ -1,15 +1,5 @@
 const fetch = require("node-fetch");
 
-const data = {
-  userId: "",
-  password: "",
-  name: "",
-  birthday: "",
-  gender: "",
-  email: "",
-  phoneNumber: "",
-};
-
 const URL = "https://test-codesquad-team1-sign-up.herokuapp.com/";
 
 export default {
