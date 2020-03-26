@@ -4,6 +4,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
 
 import java.time.LocalDate;
+import java.util.Objects;
 import java.util.regex.Matcher;
 
 import static com.codesquad.team1.signup.constants.ValidationConstants.USER_EMAIL_VALIDATION_PATTERN;
@@ -97,7 +98,17 @@ public class User {
         return this.password != null && this.password.equals(loginUser.password);
     }
 
-    public boolean matchUser(User requestedUser) {
-        return this.id == requestedUser.id;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return userId.equals(user.userId) &&
+                password.equals(user.password);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(userId, password);
     }
 }
