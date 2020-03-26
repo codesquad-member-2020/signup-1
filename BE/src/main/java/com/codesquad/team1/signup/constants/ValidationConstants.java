@@ -9,7 +9,7 @@ public class ValidationConstants {
             Pattern.compile("^(?=.*[A-Za-z])(?=.*\\d)(?=.*[!@#$%^&*_+~])[A-Za-z\\d!@#$%^&*_+~]{8,16}$");
 
     public static final Pattern USER_EMAIL_VALIDATION_PATTERN =
-            Pattern.compile("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$");
+            Pattern.compile("^(([^<>()\\[\\]\\\\.,;:\\s@\"]+(\\.[^<>()\\[\\]\\\\.,;:\\s@\"]+)*)|(\".+\"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$");
 
     public static final Pattern USER_PHONE_NUMBER_VALIDATION_PATTERN = Pattern.compile("^(010)(\\d{7,8})$");
 
