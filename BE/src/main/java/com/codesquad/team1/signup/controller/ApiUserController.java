@@ -4,7 +4,7 @@ import com.codesquad.team1.signup.Exception.ForbiddenException;
 import com.codesquad.team1.signup.Exception.UnauthorizedException;
 import com.codesquad.team1.signup.repository.User;
 import com.codesquad.team1.signup.repository.UserRepository;
-import com.codesquad.team1.signup.response.Result;
+import com.codesquad.team1.signup.response.ValidationResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
@@ -27,27 +27,27 @@ public class ApiUserController {
     }
 
     @GetMapping("/duplicate/userId/{userId}")
-    public Result isDuplicatedId(@PathVariable String userId) {
+    public ValidationResponse isDuplicatedId(@PathVariable String userId) {
         if (userRepository.countByUserId(userId) > 0) {
-            return Result.isSuccess();
+            return ValidationResponse.isSuccess();
         }
-        return Result.isFail();
+        return ValidationResponse.isFail();
     }
 
     @GetMapping("/duplicate/email/{email}")
-    public Result isDuplicatedEmail(@PathVariable String email) {
+    public ValidationResponse isDuplicatedEmail(@PathVariable String email) {
         if (userRepository.countByEmail(email) > 0) {
-            return Result.isSuccess();
+            return ValidationResponse.isSuccess();
         }
-        return Result.isFail();
+        return ValidationResponse.isFail();
     }
 
     @GetMapping("/duplicate/phone-number/{phoneNumber}")
-    public Result isDuplicatedPhoneNumber(@PathVariable String phoneNumber) {
+    public ValidationResponse isDuplicatedPhoneNumber(@PathVariable String phoneNumber) {
         if (userRepository.countByPhoneNumber(phoneNumber) > 0) {
-            return Result.isSuccess();
+            return ValidationResponse.isSuccess();
         }
-        return Result.isFail();
+        return ValidationResponse.isFail();
     }
 
     @PostMapping("/create")
@@ -59,20 +59,20 @@ public class ApiUserController {
     }
 
     @PostMapping("/login")
-    public Result login(@RequestBody User loginUser, HttpSession session) {
+    public ValidationResponse login(@RequestBody User loginUser, HttpSession session) {
         User user = userRepository.findByUserId(loginUser.getUserId()).orElseGet(User::new);
         if (!user.matchPassword(loginUser)) {
-            return Result.isFail();
+            return ValidationResponse.isFail();
         }
         session.setAttribute(SESSION_USER_KEY, user);
-        return Result.isSuccess();
+        return ValidationResponse.isSuccess();
     }
 
     @GetMapping("/logout")
-    public Result logout(HttpSession session) {
+    public ValidationResponse logout(HttpSession session) {
         session.removeAttribute(SESSION_USER_KEY);
         session.invalidate();
-        return Result.isSuccess();
+        return ValidationResponse.isSuccess();
     }
 
     @GetMapping("/{id}")
