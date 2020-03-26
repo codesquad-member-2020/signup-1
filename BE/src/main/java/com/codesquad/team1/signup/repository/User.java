@@ -1,9 +1,11 @@
 package com.codesquad.team1.signup.repository;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.MappedCollection;
 import org.springframework.data.relational.core.mapping.Table;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Objects;
 import java.util.regex.Matcher;
 
@@ -25,6 +27,9 @@ public class User {
     private Gender gender;
     private String email;
     private String phoneNumber;
+
+    @MappedCollection(idColumn = "uid", keyColumn = "id")
+    private List<Interest> interests;
 
     public int getId() {
         return id;
@@ -58,6 +63,10 @@ public class User {
         return phoneNumber;
     }
 
+    public List<Interest> getInterests() {
+        return interests;
+    }
+
     public void setUserId(String userId) {
         this.userId = userId;
     }
@@ -86,6 +95,10 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
+    public void setInterests(List<Interest> interests) {
+        this.interests = interests;
+    }
+
     public boolean validate() {
         Matcher idMatcher = USER_ID_VALIDATION_PATTERN.matcher(this.userId);
         Matcher passwordMatcher = USER_PASSWORD_VALIDATION_PATTERN.matcher(this.password);
@@ -103,13 +116,13 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return userId.equals(user.userId) &&
-                email.equals(user.email) &&
-                phoneNumber.equals(user.phoneNumber);
+        return this.userId.equals(user.userId) &&
+                this.email.equals(user.email) &&
+                this.phoneNumber.equals(user.phoneNumber);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userId, password);
+        return Objects.hash(this.userId, this.email, this.phoneNumber);
     }
 }
