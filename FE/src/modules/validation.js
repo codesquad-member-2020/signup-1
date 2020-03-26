@@ -1,5 +1,8 @@
+import app from "./server.js";
 import { _q, daysInMonth } from "./util.js";
-import { PATTERN, FORM_ID, LIMITED_LENGTH, ERROR_MSG_ID, NUM_KEY_CODE_ZERO, NUM_KEY_CODE_NINE, TOGGLE_CLASS } from "./constants.js";
+import { PATTERN, FORM_ID, LIMITED_LENGTH, ERROR_MSG_ID, NUM_KEY_CODE_ZERO, NUM_KEY_CODE_NINE, TOGGLE_CLASS, CHECK_DELAY_TIME } from "./constants.js";
+
+const fetch = require("node-fetch");
 
 const fields = {
   userId: {
@@ -11,11 +14,19 @@ const fields = {
     },
     selectErrorMessage() {
       if (!this.isFieldValid()) return this.errorMessage.misMatch;
+      if (this.isDuplicateUserId()) return this.errorMessage.duplicate;
       return "";
+    },
+    isDuplicate() {
+      let timeout = null;
+      clearTimeout(timeout);
+      timeout = setTimeout(() => {
+        return app.checkDuplicate(this.inputElement.value);
+      }, CHECK_DELAY_TIME);
     },
     errorMessage: {
       misMatch: "5~20자의 영문 소문자, 숫자와 특수기호(_)(-) 만 사용 가능합니다.",
-      overlap: "이미 사용중인 아이디입니다.",
+      duplicate: "이미 사용중인 아이디입니다.",
     },
     errorMessageElement: _q(ERROR_MSG_ID.userId),
     passMessage: "사용 가능한 아이디입니다.",
