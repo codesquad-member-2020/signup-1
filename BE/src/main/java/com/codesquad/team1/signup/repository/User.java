@@ -93,7 +93,7 @@ public class User {
         return idMatcher.matches() && passwordMatcher.matches() && emailMatcher.matches() && phoneNumberMatcher.matches();
     }
 
-    public boolean matchPassword(String password) {
-        return this.password.equals(password);
+    public boolean matchPassword(User loginUser) {
+        return this.password.equals(loginUser.password);
     }
 }
