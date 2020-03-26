@@ -49,8 +49,8 @@ const validateSelectForms = event => {
 };
 
 const preventKeypressExceptNum = event => {
-  const { year } = inputFields.birthDay.inputElement;
-  const { day } = inputFields.birthDay.inputElement;
+  const year = inputFields.year.inputElement;
+  const day = inputFields.day.inputElement;
   const phoneNumber = inputFields.phoneNumber.inputElement;
   if (event.target === year || event.target === day || event.target === phoneNumber) {
     if (event.keyCode < NUM_KEY_CODE_ZERO || event.keyCode > NUM_KEY_CODE_NINE) {
