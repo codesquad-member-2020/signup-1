@@ -1,26 +1,24 @@
 import app from "./server.js";
-import { _q, daysInMonth } from "./util.js";
+import { _q, daysInMonth, toggleClass } from "./util.js";
 import { PATTERN, FORM_ID, LIMITED_LENGTH, ERROR_MSG_ID, NUM_KEY_CODE_ZERO, NUM_KEY_CODE_NINE, TOGGLE_CLASS, CHECK_DELAY_TIME } from "./constants.js";
-
-const fetch = require("node-fetch");
 
 const fields = {
   userId: {
     inputElement: _q(FORM_ID.userId),
+    timeout: null,
+    selectErrorMessage() {
+      if (!this.isFieldValid()) return this.errorMessage.misMatch;
+      if (this.isDuplicate()) return this.errorMessage.duplicate;
+      return "";
+    },
     isFieldValid() {
       const userId = this.inputElement.value;
       const userIdRegex = PATTERN.userId;
       return userId !== "" && userIdRegex.test(userId);
     },
-    selectErrorMessage() {
-      if (!this.isFieldValid()) return this.errorMessage.misMatch;
-      if (this.isDuplicateUserId()) return this.errorMessage.duplicate;
-      return "";
-    },
     isDuplicate() {
-      let timeout = null;
-      clearTimeout(timeout);
-      timeout = setTimeout(() => {
+      clearTimeout(this.timeout);
+      this.timeout = setTimeout(() => {
         return app.checkDuplicate(this.inputElement.value);
       }, CHECK_DELAY_TIME);
     },
@@ -34,11 +32,6 @@ const fields = {
 
   password: {
     inputElement: _q(FORM_ID.password),
-    isFieldValid() {
-      const password = this.inputElement.value;
-      const passwordRegex = PATTERN.password.all;
-      return password !== "" && passwordRegex.test(password);
-    },
     selectErrorMessage() {
       const password = this.inputElement.value;
       if (password.length < LIMITED_LENGTH.password_min || password.length > LIMITED_LENGTH.password_max) {
@@ -81,28 +74,67 @@ const fields = {
     passMessage: "비밀번호가 일치합니다.",
   },
 
+  // year: {
+  //   inputElement: _q(FORM_ID.year),
+  //   selectErrorMessage() {
+  //     const year = this.inputElement.value;
+  //     const today = new Date();
+  //     const age = today.getFullYear() - year + 1;
+  //     if (!this.isValidYear(age)) return this.errorMessage;
+  //     return "";
+  //   },
+  //   isValidYear(age) {
+  //     if (age >= LIMITED_LENGTH.age_min && age <= LIMITED_LENGTH.age_max) return true;
+  //     return false;
+  //   },
+  //   errorMessageElement: _q(ERROR_MSG_ID.birthday),
+  //   errorMessage: "태어난 년도 4자리를 정확하게 입력하세요.",
+  //   passMessage: "",
+  // },
+
+  // month: {
+  //   inputElement: _q(FORM_ID.year),
+  // },
+
+  // day: {
+  //   inputElement: _q(FORM_ID.year),
+  // },
+
   birthDay: {
     inputElement: {
       year: _q(FORM_ID.year),
       month: _q(FORM_ID.month),
       day: _q(FORM_ID.day),
     },
-    isFieldValid() {
+    selectErrorMessage() {
       const year = this.inputElement.year.value;
       const month = this.inputElement.month.value;
       const day = this.inputElement.day.value;
       const today = new Date();
       const thisYear = today.getFullYear();
-      const limitDay = daysInMonth(month);
-      if (day < 1 || day > limitDay) console.log(this.inputElement.day);
+      const age = thisYear - year + 1;
+      if (!this.isValidYear(age)) return this.errorMessage.year;
+      if (!this.isValidAge(age, month)) return this.errorMessage.age;
+      if (this.isValidDayinMonth(month, day)) return this.errorMessage.day;
+      return "";
     },
-    selectErrorMessage() {
-      this.isFieldValid();
+    isValidYear(age) {
+      if (age >= LIMITED_LENGTH.age_min && age <= LIMITED_LENGTH.age_max) return true;
+      return false;
+    },
+    isValidAge(age, month) {
+      if (age >= LIMITED_LENGTH.age_min) return true;
+      return false;
+    },
+    isValidDayinMonth(month, day) {
+      const validDay = daysInMonth(month);
+      if (day < 1 || day > validDay) return true;
+      return false;
     },
     errorMessageElement: _q(ERROR_MSG_ID.birthday),
     errorMessage: {
       year: "태어난 년도 4자리를 정확하게 입력하세요.",
-      old: "만 14세 이상만 가입 가능합니다.",
+      age: "만 14세 이상만 가입 가능합니다.",
       day: "태어난 날짜를 다시 확인해주세요.",
     },
     passMessage: "",
@@ -110,14 +142,14 @@ const fields = {
 
   email: {
     inputElement: _q(FORM_ID.email),
+    selectErrorMessage() {
+      if (!this.isFieldValid()) return this.errorMessage;
+      return "";
+    },
     isFieldValid() {
       const email = this.inputElement.value;
       const emailRegexp = PATTERN.email;
       return email !== "" && emailRegexp.test(email);
-    },
-    selectErrorMessage() {
-      if (!this.isFieldValid()) return this.errorMessage;
-      return "";
     },
     errorMessageElement: _q(ERROR_MSG_ID.email),
     errorMessage: "이메일 주소를 다시 확인해주세요.",
@@ -126,14 +158,14 @@ const fields = {
 
   phoneNumber: {
     inputElement: _q(FORM_ID.phoneNumber),
+    selectErrorMessage() {
+      if (!this.isFieldValid()) return this.errorMessage;
+      return "";
+    },
     isFieldValid() {
       const phoneNumber = this.inputElement.value;
       const phoneNumberRegexp = PATTERN.phoneNumber;
       return phoneNumber !== "" && phoneNumberRegexp.test(phoneNumber);
-    },
-    selectErrorMessage() {
-      if (!this.isFieldValid()) return this.errorMessage;
-      return "";
     },
     errorMessageElement: _q(ERROR_MSG_ID.phoneNumber),
     errorMessage: "형식에 맞지 않는 번호입니다.",
@@ -142,33 +174,27 @@ const fields = {
 };
 
 const validateFormInputs = event => {
-  if (event.target === fields.password.inputElement) {
-    console.log(fields.password.selectErrorMessage());
-  }
-  if (event.target === fields.userId.inputElement) {
-    console.log(fields.userId.selectErrorMessage());
-  }
-  if (event.target === fields.checkPassword.inputElement) {
-    console.log(fields.checkPassword.selectErrorMessage());
-  }
-  if (event.target === fields.email.inputElement) {
-    console.log(fields.email.selectErrorMessage());
-  }
-  if (event.target === fields.birthDay.inputElement.day) {
-    console.log(fields.birthDay.selectErrorMessage());
-    // console.log(fields.birthDay.inputElement.month.value);
-    // console.log(fields.birthDay.inputElement.day.value);
-  }
-  if (event.target === fields.phoneNumber.inputElement) {
-    console.log(fields.phoneNumber.selectErrorMessage());
-  }
+  Object.keys(fields).forEach(field => {
+    const currentField = fields[field];
+    if (event.target === currentField.inputElement) {
+      let message = currentField.selectErrorMessage();
+      const messageElement = currentField.errorMessageElement;
+      if (message === "") {
+        toggleClass(messageElement, TOGGLE_CLASS.pass, TOGGLE_CLASS.error);
+        message = currentField.passMessage;
+      } else {
+        toggleClass(messageElement, TOGGLE_CLASS.error, TOGGLE_CLASS.pass);
+      }
+      messageElement.innerHTML = message;
+    }
+  });
 };
 
 const preventKeypressExceptNum = event => {
-  const yearInput = fields.birthDay.inputElement.year;
-  const dayInput = fields.birthDay.inputElement.day;
-  const phoneNumberInput = fields.phoneNumber.inputElement;
-  if (event.target === yearInput || event.target === dayInput || event.target === phoneNumberInput) {
+  const { year } = fields.birthDay.inputElement;
+  const { day } = fields.birthDay.inputElement;
+  const phoneNumber = fields.phoneNumber.inputElement;
+  if (event.target === year || event.target === day || event.target === phoneNumber) {
     if (event.keyCode < NUM_KEY_CODE_ZERO || event.keyCode > NUM_KEY_CODE_NINE) {
       event.returnValue = false;
     }

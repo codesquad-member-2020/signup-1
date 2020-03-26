@@ -16,6 +16,8 @@ export const LIMITED_LENGTH = {
   password_min: 8,
   password_max: 16,
   year: 4,
+  age_min: 15,
+  age_max: 99,
 };
 
 export const FORM_ID = {
@@ -37,7 +39,7 @@ export const ERROR_MSG_ID = {
   password: "#error-msg-password",
   checkPassword: "#error-msg-check-password",
   email: "#error-msg-email",
-  phoneNumber: "#error-msg-phoneNumber",
+  phoneNumber: "#error-msg-phone",
   birthday: "#error-msg-birthday",
   interest: "#error-msg-interest",
 };
