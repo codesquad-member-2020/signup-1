@@ -2,12 +2,28 @@ import { PATTERN, FORM_ID, LIMITED_LENGTH, ERROR_MSG_ID } from "./constants.js";
 import app from "./server.js";
 import { _q, daysInMonth } from "./util.js";
 
-export default {
+export const selectFields = {
+  gender: {
+    selectElement: _q(FORM_ID.gender),
+    isSelected() {
+      return this.selectElement.value !== "";
+    },
+  },
+  month: {
+    selectElement: _q(FORM_ID.month),
+    isSelected() {
+      return this.selectElement.value !== "";
+    },
+  },
+};
+
+export const inputFields = {
   userId: {
     inputElement: _q(FORM_ID.userId),
     timeout: null,
     selectErrorMessage() {
       if (!this.isFieldValid()) return this.errorMessage.misMatch;
+      console.log(this.isDuplicate());
       if (this.isDuplicate()) return this.errorMessage.duplicate;
       return null;
     },
@@ -71,31 +87,32 @@ export default {
     passMessage: "비밀번호가 일치합니다.",
   },
 
-  birthDay: {
-    inputElement: {
-      year: _q(FORM_ID.year),
-      month: _q(FORM_ID.month),
-      day: _q(FORM_ID.day),
-    },
+  year: {
+    inputElement: _q(FORM_ID.year),
     selectErrorMessage() {
-      const year = this.inputElement.year.value;
-      const month = this.inputElement.month.value;
-      const day = this.inputElement.day.value;
+      const year = this.inputElement.value;
       const today = new Date();
       const thisYear = today.getFullYear();
       const age = thisYear - year + 1;
-      if (!this.isValidYear(age)) return this.errorMessage.year;
-      if (!this.isValidAge(age, month)) return this.errorMessage.age;
-      if (this.isValidDayinMonth(month, day)) return this.errorMessage.day;
+      if (!this.isValidYear(age)) return this.errorMessage;
       return null;
     },
     isValidYear(age) {
       if (age >= LIMITED_LENGTH.age_min && age <= LIMITED_LENGTH.age_max) return true;
       return false;
     },
-    isValidAge(age, month) {
-      if (age >= LIMITED_LENGTH.age_min) return true;
-      return false;
+    errorMessageElement: _q(ERROR_MSG_ID.birthday),
+    errorMessage: "태어난 년도 4자리를 정확하게 입력하세요.",
+    passMessage: "",
+  },
+
+  day: {
+    inputElement: _q(FORM_ID.day),
+    selectErrorMessage() {
+      const month = selectFields.month.selectElement.value;
+      const day = this.inputElement.value;
+      if (this.isValidDayinMonth(month, day)) return this.errorMessage;
+      return null;
     },
     isValidDayinMonth(month, day) {
       const validDay = daysInMonth(month);
@@ -103,11 +120,7 @@ export default {
       return false;
     },
     errorMessageElement: _q(ERROR_MSG_ID.birthday),
-    errorMessage: {
-      year: "태어난 년도 4자리를 정확하게 입력하세요.",
-      age: "만 14세 이상만 가입 가능합니다.",
-      day: "태어난 날짜를 다시 확인해주세요.",
-    },
+    errorMessage: "태어난 날짜를 다시 확인해주세요.",
     passMessage: "",
   },
 
@@ -147,6 +160,16 @@ export default {
     },
     errorMessageElement: _q(ERROR_MSG_ID.phoneNumber),
     errorMessage: "형식에 맞지 않는 번호입니다.",
+    passMessage: "",
+  },
+
+  interest: {
+    inputElement: _q(FORM_ID.interest),
+    selectErrorMessage() {
+      return null;
+    },
+    errorMessageElement: _q(ERROR_MSG_ID.interest),
+    errorMessage: "3개 이상의 관심사를 입력하세요.",
     passMessage: "",
   },
 };
