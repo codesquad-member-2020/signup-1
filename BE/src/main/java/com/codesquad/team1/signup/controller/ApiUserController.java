@@ -1,5 +1,6 @@
 package com.codesquad.team1.signup.controller;
 
+import com.codesquad.team1.signup.Exception.ErrorResponse;
 import com.codesquad.team1.signup.Exception.ForbiddenException;
 import com.codesquad.team1.signup.Exception.UnauthorizedException;
 import com.codesquad.team1.signup.repository.User;
@@ -7,6 +8,8 @@ import com.codesquad.team1.signup.repository.UserRepository;
 import com.codesquad.team1.signup.response.ValidationResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -79,11 +82,21 @@ public class ApiUserController {
 
     @GetMapping("/{id}")
     public User showPersonalInformation(@PathVariable String id, HttpSession session) {
-        User sessionedUser = Optional.ofNullable((User)session.getAttribute(SESSION_USER_KEY)).orElseThrow(() -> new UnauthorizedException("접근 권한이 없습니다."));
+        User sessionedUser = Optional.ofNullable((User)session.getAttribute(SESSION_USER_KEY)).orElseThrow(() -> new UnauthorizedException("로그인이 필요합니다."));
         User requestedUser = userRepository.findById(id).orElseGet(User::new);
         if (!sessionedUser.equals(requestedUser)) {
-            throw new ForbiddenException("로그인이 필요합니다.");
+            throw new ForbiddenException("접근 권한이 없습니다.");
         }
         return requestedUser;
+    }
+
+    @ExceptionHandler(UnauthorizedException.class)
+    public ResponseEntity<ErrorResponse> handleUnauthorizedException(UnauthorizedException e) {
+        return new ResponseEntity<>(new ErrorResponse(e.getMessage(), HttpStatus.UNAUTHORIZED.value()), HttpStatus.UNAUTHORIZED);
+    }
+
+    @ExceptionHandler(ForbiddenException.class)
+    public ResponseEntity<ErrorResponse> handleForbiddenException(ForbiddenException e) {
+        return new ResponseEntity<>(new ErrorResponse(e.getMessage(), HttpStatus.FORBIDDEN.value()), HttpStatus.FORBIDDEN);
     }
 }
