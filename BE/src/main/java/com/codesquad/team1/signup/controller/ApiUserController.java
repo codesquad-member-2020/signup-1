@@ -70,7 +70,7 @@ public class ApiUserController {
         return ValidationResponse.isSuccess();
     }
 
-    @GetMapping("/logout")
+    @PostMapping("/logout")
     public ValidationResponse logout(HttpSession session) {
         session.removeAttribute(SESSION_USER_KEY);
         session.invalidate();
