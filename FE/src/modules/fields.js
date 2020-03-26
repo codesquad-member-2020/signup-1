@@ -1,5 +1,5 @@
-import { PATTERN, FORM_ID, LIMITED_LENGTH, ERROR_MSG_ID, ERROR_MESSAGE, PASS_MESSAGE, PASS } from "./constants.js";
 import app from "./server.js";
+import { PATTERN, FORM_ID, LIMITED_LENGTH, ERROR_MSG_ID, ERROR_MESSAGE, PASS_MESSAGE, PASS } from "./constants.js";
 import { _q, daysInMonth } from "./util.js";
 
 export const selectFields = {
@@ -20,18 +20,23 @@ export const selectFields = {
 export const inputFields = {
   userId: {
     inputElement: _q(FORM_ID.userId),
-    selectErrorMessage() {
+    async selectErrorMessage() {
       if (!this.isFieldValid()) return this.errorMessage.misMatch;
-      if (this.isDuplicate()) return this.errorMessage.duplicate;
+      const isDuplicate = await app.fetchData(this.inputElement.value);
+      if (isDuplicate.valid) return this.errorMessage.duplicate;
+      console.log(isDuplicate.valid);
       return PASS;
     },
+    // async isDuplicate() {
+    //   const isDuplicate = await app.fetchData(this.inputElement.value);
+    //   console.log(isDuplicate, typeof isDuplicate, isDuplicate.valid);
+    //   console.log("is Await?", this.inputElement.value);
+    //   return isDuplicate.valid;
+    // },
     isFieldValid() {
       const userId = this.inputElement.value;
       const userIdRegex = PATTERN.userId;
       return userId !== "" && userIdRegex.test(userId);
-    },
-    isDuplicate() {
-      return app.checkDuplicate(this.inputElement.value);
     },
     errorMessage: {
       misMatch: ERROR_MESSAGE.userID.misMatch,

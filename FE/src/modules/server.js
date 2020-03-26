@@ -1,32 +1,24 @@
+import userData from "./userData.js";
+
 const fetch = require("node-fetch");
 
 const URL = "https://test-codesquad-team1-sign-up.herokuapp.com/api/";
 
-const _parseJSON = response => {
-  return response.text().then(function(text) {
-    return text ? JSON.parse(text) : {};
-  });
-};
-
 export default {
-  checkDuplicate: value => {
-    fetch(`${URL}users/duplicate/userId/${value}`, {
-      mode: "no-cors",
-    })
-      .then(response => _parseJSON(response))
-      .then(json => console.log(json));
+  fetchData: value => {
+    return fetch(`${URL}users/duplicate/userId/${value}`, {
+      method: "GET",
+      redirect: "follow",
+    }).then(response => response.json());
   },
-  send: userData => {
+  send: () => {
     fetch(`${URL}api/users/create`, {
       method: "POST",
-      mode: "no-cors",
-      body: JSON.stringify(userData),
-      headers: {
-        "Content-Type": "application/json",
-      },
+      body: userData,
+      redirect: "follow",
     })
       .then(res => res.json())
-      .then(response => console.log("Success:", JSON.stringify(response)))
-      .catch(error => console.error("Error:", error));
+      .then(result => console.log(result))
+      .catch(error => console.log("error", error));
   },
 };
