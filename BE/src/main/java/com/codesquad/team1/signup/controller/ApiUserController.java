@@ -91,12 +91,12 @@ public class ApiUserController {
     }
 
     @ExceptionHandler(UnauthorizedException.class)
-    public ResponseEntity<ErrorResponse> handleUnauthorizedException(UnauthorizedException e) {
-        return new ResponseEntity<>(new ErrorResponse(e.getMessage(), HttpStatus.UNAUTHORIZED.value()), HttpStatus.UNAUTHORIZED);
+    public ErrorResponse handleUnauthorizedException(UnauthorizedException e) {
+        return new ErrorResponse(e.getMessage(), HttpStatus.UNAUTHORIZED.value());
     }
 
     @ExceptionHandler(ForbiddenException.class)
-    public ResponseEntity<ErrorResponse> handleForbiddenException(ForbiddenException e) {
-        return new ResponseEntity<>(new ErrorResponse(e.getMessage(), HttpStatus.FORBIDDEN.value()), HttpStatus.FORBIDDEN);
+    public ErrorResponse handleForbiddenException(ForbiddenException e) {
+        return new ErrorResponse(e.getMessage(), HttpStatus.FORBIDDEN.value());
     }
 }
