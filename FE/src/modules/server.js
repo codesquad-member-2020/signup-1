@@ -13,9 +13,7 @@ export default {
     fetch(`${URL}users/duplicate/userId/${value}`, {
       mode: "no-cors",
     })
-      .then(response => {
-        _parseJSON(response);
-      })
+      .then(response => _parseJSON(response))
       .then(json => console.log(json));
   },
   send: userData => {
