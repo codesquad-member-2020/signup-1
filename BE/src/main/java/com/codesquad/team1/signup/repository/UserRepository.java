@@ -18,4 +18,7 @@ public interface UserRepository extends CrudRepository<User, Integer> {
 
     @Query("select * from USERS where binary user_id = :userId")
     Optional<User> findByUserId(String userId);
+
+    @Query("select * from USERS where id = :id")
+    Optional<User> findById(String id);
 }
