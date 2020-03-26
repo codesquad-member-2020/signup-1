@@ -1,5 +1,7 @@
 package com.codesquad.team1.signup.controller;
 
+import com.codesquad.team1.signup.Exception.ForbiddenException;
+import com.codesquad.team1.signup.Exception.UnauthorizedException;
 import com.codesquad.team1.signup.repository.User;
 import com.codesquad.team1.signup.repository.UserRepository;
 import org.slf4j.Logger;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.security.InvalidParameterException;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/users")
@@ -48,6 +51,7 @@ public class ApiUserController {
     @PostMapping("/login")
     public boolean login(@RequestBody User loginUser, HttpSession session) {
         User user = userRepository.findByUserId(loginUser.getUserId()).orElseGet(User::new);
+
         if (!user.matchPassword(loginUser))
             return false;
 
@@ -60,5 +64,16 @@ public class ApiUserController {
         session.removeAttribute(SESSION_USER_KEY);
         session.invalidate();
         return true;
+    }
+
+    @GetMapping("/{id}")
+    public User showPersonalInformation(@PathVariable String id, HttpSession session) {
+        User sessionedUser = (User)Optional.ofNullable(session.getAttribute(SESSION_USER_KEY)).orElseThrow(UnauthorizedException::new);
+        User requestedUser = userRepository.findById(id).orElseGet(User::new);
+
+        if (!sessionedUser.matchUser(requestedUser))
+            throw new ForbiddenException();
+
+        return requestedUser;
     }
 }
