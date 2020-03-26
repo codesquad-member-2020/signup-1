@@ -47,13 +47,13 @@ public class ApiUserController {
     }
 
     @PostMapping("/login")
-    public boolean login(@RequestParam String userId, @RequestParam String password, HttpSession session) {
-        Optional<User> optionalUser = userRepository.findByUserId(userId);
+    public boolean login(@RequestBody User loginUser, HttpSession session) {
+        Optional<User> optionalUser = userRepository.findByUserId(loginUser.getUserId());
         if (!optionalUser.isPresent())
             return false;
 
         User user = optionalUser.get();
-        if (!user.matchPassword(password))
+        if (!user.matchPassword(loginUser))
             return false;
 
         session.setAttribute(SESSION_USER_KEY, user);
