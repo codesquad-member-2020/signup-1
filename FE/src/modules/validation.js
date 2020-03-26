@@ -1,9 +1,9 @@
-import inputFields from "./inputFields.js";
+import { inputFields, selectFields } from "./fields.js";
 import userData from "./userData.js";
 import { _q, toggleClass } from "./util.js";
 import { NUM_KEY_CODE_ZERO, NUM_KEY_CODE_NINE, TOGGLE_CLASS } from "./constants.js";
 
-const generateErrorMessage = (element = null, message) => {
+const generateMessage = (element = null, message) => {
   if (!element) return;
   element.innerHTML = message;
 };
@@ -28,7 +28,22 @@ const validateInputForms = event => {
         setUserData(field, null);
         toggleClass(messageElement, TOGGLE_CLASS.error, TOGGLE_CLASS.pass);
       }
-      generateErrorMessage(messageElement, errorMessage);
+      generateMessage(messageElement, errorMessage);
+    }
+  });
+};
+
+const validateSelectForms = event => {
+  Object.keys(selectFields).forEach(field => {
+    const currentField = selectFields[field];
+    if (event.target === currentField.selectElement) {
+      const isSelected = currentField.isSelected();
+      if (isSelected) {
+        const selectValue = currentField.selectElement.value;
+        setUserData(field, selectValue);
+      } else {
+        setUserData(field, null);
+      }
     }
   });
 };
@@ -48,6 +63,7 @@ const signupForm = _q("form");
 const buttons = _q(".btn-wrap");
 
 signupForm.addEventListener("input", event => validateInputForms(event));
+signupForm.addEventListener("change", event => validateSelectForms(event));
 signupForm.addEventListener("keypress", event => preventKeypressExceptNum(event));
 
 buttons.addEventListener("click", event => {

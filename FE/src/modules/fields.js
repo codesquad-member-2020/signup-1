@@ -2,12 +2,13 @@ import { PATTERN, FORM_ID, LIMITED_LENGTH, ERROR_MSG_ID } from "./constants.js";
 import app from "./server.js";
 import { _q, daysInMonth } from "./util.js";
 
-export default {
+export const inputFields = {
   userId: {
     inputElement: _q(FORM_ID.userId),
     timeout: null,
     selectErrorMessage() {
       if (!this.isFieldValid()) return this.errorMessage.misMatch;
+      console.log(this.isDuplicate());
       if (this.isDuplicate()) return this.errorMessage.duplicate;
       return null;
     },
@@ -148,5 +149,30 @@ export default {
     errorMessageElement: _q(ERROR_MSG_ID.phoneNumber),
     errorMessage: "형식에 맞지 않는 번호입니다.",
     passMessage: "",
+  },
+
+  interest: {
+    inputElement: _q(FORM_ID.interest),
+    selectErrorMessage() {
+      return null;
+    },
+    errorMessageElement: _q(ERROR_MSG_ID.interest),
+    errorMessage: "3개 이상의 관심사를 입력하세요.",
+    passMessage: "",
+  },
+};
+
+export const selectFields = {
+  gender: {
+    selectElement: _q(FORM_ID.gender),
+    isSelected() {
+      return this.selectElement.value !== "";
+    },
+  },
+  month: {
+    selectElement: _q(FORM_ID.month),
+    isSelected() {
+      return this.selectElement.value !== "";
+    },
   },
 };
