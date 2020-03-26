@@ -38,6 +38,9 @@
                                         <real key="value" value="0.0"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="editingChanged:" destination="w9C-CJ-dLq" eventType="editingChanged" id="1EP-jH-3MP"/>
+                                </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="이미 사용중인 아이디입니다." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IZL-NO-Ly4">
                                 <rect key="frame" x="50" y="142" width="314" height="14.5"/>
@@ -153,10 +156,11 @@
                     </view>
                     <navigationItem key="navigationItem" id="Qk3-WH-gbF"/>
                     <connections>
-                        <outlet property="idTextField" destination="fMn-yF-boa" id="UTe-3l-pCH"/>
+                        <outlet property="idTextField" destination="fMn-yF-boa" id="5bm-HJ-muf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <exit id="w9C-CJ-dLq" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1048" y="138"/>
         </scene>
