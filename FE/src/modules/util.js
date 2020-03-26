@@ -21,3 +21,9 @@ export const daysInMonth = num => {
       return 31;
   }
 };
+
+export const toggleClass = (target, addClassName, removeClassName) => {
+  if (target.classList.contains(addClassName)) return;
+  target.classList.add(addClassName);
+  target.classList.remove(removeClassName);
+};
