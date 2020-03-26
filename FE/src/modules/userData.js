@@ -1,0 +1,15 @@
+export default new Map([
+  ["userId", null],
+  ["password", null],
+  ["checkPassword", null],
+  ["name", null],
+  ["year", null],
+  ["month", null],
+  ["day", null],
+  ["birthDay", null],
+  ["gender", null],
+  ["email", null],
+  ["phoneNumber", null],
+  ["interest", null],
+  ["terms", null],
+]);

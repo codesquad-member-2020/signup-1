@@ -15,29 +15,29 @@
       <form action="" method="post">
         <div class="form-id">
           <label for="userId">아이디</label>
-          <input type="text" name="userId" id="userId" minlength="5" maxlength="20" size="20" aria-errormessage="error-msg-id" aria-required />
-          <span class="error-msg error" id="error-msg-id" role="alert" aria-role="alert" aria-live="assertive">제대로된 이메일을 입력</span>
+          <input type="text" name="userId" id="userId" minlength="5" maxlength="20" size="20" aria-errormessage="error-msg-id" required />
+          <span class="error-msg" id="error-msg-id" role="alert" aria-role="alert" aria-live="assertive"></span>
         </div>
         <div class="form-password">
           <label for="password">비밀번호</label>
-          <input type="password" name="password" id="password" minlength="8" maxlength="16" size="16" aria-errormessage="error-msg-password" aria-required />
+          <input type="password" name="password" id="password" minlength="8" maxlength="16" size="16" aria-errormessage="error-msg-password" />
           <span class="error-msg" id="error-msg-password" role="alert" aria-role="alert" aria-live="assertive"></span>
         </div>
         <div class="form-check-password">
           <label for="check-password">비밀번호 재확인</label>
-          <input type="password" name="check-password" id="check-password" minlength="8" maxlength="16" size="16" aria-errormessage="error-msg-check-password" aria-required />
+          <input type="password" name="check-password" id="check-password" minlength="8" maxlength="16" size="16" aria-errormessage="error-msg-check-password" />
           <span class="error-msg" id="error-msg-check-password" role="alert" aria-role="alert" aria-live="assertive"></span>
         </div>
         <div class="form-name">
           <label for="name">이름</label>
-          <input type="text" name="name" id="name" aria-required />
+          <input type="text" name="name" id="name" />
         </div>
         <div class="form-birthday">
           <label for="year">생년월일</label>
           <div class="birthday-wrap">
-            <input type="text" name="year" id="year" placeholder="년(4자)" aria-label="년(4자)" aria-errormessage="error-msg-birthday" aria-required />
+            <input type="text" name="year" id="year" placeholder="년(4자)" aria-label="년(4자)" aria-errormessage="error-msg-birthday" maxlength="4" />
             <div class="month-select-wrap">
-              <select name="month" id="month" aria-label="월" aria-errormessage="error-msg-birthday" aria-required>
+              <select name="month" id="month" aria-label="월" aria-errormessage="error-msg-birthday">
                 <option value="" selected>월</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -54,14 +54,14 @@
               </select>
               <i class="material-icons md-36 expand-more">expand_more</i>
             </div>
-            <input type="text" name="day" id="day" placeholder="일" aria-label="일" aria-errormessage="error-msg-birthday" aria-required />
+            <input type="text" name="day" id="day" placeholder="일" maxlength="2" aria-label="일" aria-errormessage="error-msg-birthday" />
           </div>
           <span class="error-msg" id="error-msg-birthday" role="alert" aria-role="alert" aria-live="assertive"></span>
         </div>
         <div class="form-gender">
           <label for="gender">성별</label>
           <div class="gender-select-wrap">
-            <select name="gender" id="gender" aria-required>
+            <select name="gender" id="gender">
               <option value="" selected>성별</option>
               <option value="MALE">남자</option>
               <option value="FEMALE">여자</option>
@@ -71,12 +71,12 @@
         </div>
         <div class="form-email">
           <label for="email">이메일</label>
-          <input type="email" name="email" id="email" aria-errormessage="error-msg-email" aria-required />
+          <input type="email" name="email" id="email" aria-errormessage="error-msg-email" />
           <span class="error-msg" id="error-msg-email" role="alert" aria-role="alert" aria-live="assertive"></span>
         </div>
         <div class="form-phone">
           <label for="phoneNumber">휴대전화</label>
-          <input type="tel" name="phoneNumber" id="phoneNumber" placeholder="- 없이 입력해주세요. 예) 0101231234" minlength="10" maxlength="11" aria-errormessage="error-msg-phone" aria-required />
+          <input type="tel" name="phoneNumber" id="phoneNumber" placeholder="- 없이 입력해주세요. 예) 0101231234" minlength="10" maxlength="11" aria-errormessage="error-msg-phone" />
           <span class="error-msg" id="error-msg-phone" role="alert" aria-role="alert" aria-live="assertive"></span>
         </div>
         <div class="form-interest">
@@ -138,13 +138,13 @@
               <span>개발</span>
               <i class="material-icons md-18 close">close</i>
             </div>
-            <input type="text" name="interest" id="interest" aria-errormessage="error-msg-interest" aria-required />
+            <input type="text" name="interest" id="interest" aria-errormessage="error-msg-interest" />
           </div>
           <span class="error-msg" id="error-msg-interest" role="alert" aria-role="alert" aria-live="assertive"></span>
         </div>
         <div class="form-terms">
           <label for="terms"><a href="#none">약관에 동의합니다.</a></label>
-          <input type="checkbox" id="terms" name="terms" readonly aria-required />
+          <input type="checkbox" id="terms" name="terms" readonly />
         </div>
         <div class="btn-wrap">
           <button class="reset-btn" type="reset">초기화</button>
