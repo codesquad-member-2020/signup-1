@@ -94,6 +94,6 @@ public class User {
     }
 
     public boolean matchPassword(User loginUser) {
-        return this.password.equals(loginUser.password);
+        return this.password != null && this.password.equals(loginUser.password);
     }
 }
