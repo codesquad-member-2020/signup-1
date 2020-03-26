@@ -23,7 +23,7 @@ public class ApiUserController {
         this.userRepository = userRepository;
     }
 
-    @GetMapping("/duplicate/id/{userId}")
+    @GetMapping("/duplicate/userId/{userId}")
     public boolean isDuplicatedId(@PathVariable String userId) {
         return userRepository.countByUserId(userId) > 0;
     }
