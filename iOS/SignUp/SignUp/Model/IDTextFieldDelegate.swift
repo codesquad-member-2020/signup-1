@@ -10,7 +10,17 @@ import UIKit
 
 class IDTextFieldDelegate : NSObject, UITextFieldDelegate {
     
-    func textFieldDidBeginEditing(_ textField: IDTextField) {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
         guard let inputText = textField.text else { return }
+        self.checkInvalid(id: inputText)
     }
+    
+    func checkInvalid(id: String) -> Bool {
+       let idRegEx = "^[a-z0-9-_]{5,20}$"
+
+                let idTest = NSPredicate(format:"SELF MATCHES %@", idRegEx)
+
+                return idTest.evaluate(with: id)
+    }
+
 }

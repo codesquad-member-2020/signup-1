@@ -10,8 +10,8 @@ import UIKit
 
 class UserInfoViewController: UIViewController {
     let idTextFieldDelegate = IDTextFieldDelegate()
-
-    @IBOutlet weak var idTextField: UITextField!
+    
+    @IBOutlet weak var idTextField: IDTextField!
     override func viewDidLoad() {
         super.viewDidLoad()
         idTextField.delegate = idTextFieldDelegate
