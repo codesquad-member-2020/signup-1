@@ -1,24 +1,8 @@
-import { PATTERN, FORM_ID, LIMITED_LENGTH, ERROR_MSG_ID, CHECK_DELAY_TIME } from "./constants.js";
+import { PATTERN, FORM_ID, LIMITED_LENGTH, ERROR_MSG_ID } from "./constants.js";
 import app from "./server.js";
 import { _q, daysInMonth } from "./util.js";
 
-export const inputData = new Map([
-  ["userId", null],
-  ["password", null],
-  ["checkPassword", null],
-  ["name", null],
-  ["year", null],
-  ["month", null],
-  ["day", null],
-  ["birthDay", null],
-  ["gender", null],
-  ["email", null],
-  ["phoneNumber", null],
-  ["interest", null],
-  ["terms", null],
-]);
-
-export const inputFields = {
+export default {
   userId: {
     inputElement: _q(FORM_ID.userId),
     timeout: null,
@@ -33,10 +17,7 @@ export const inputFields = {
       return userId !== "" && userIdRegex.test(userId);
     },
     isDuplicate() {
-      // clearTimeout(this.timeout);
-      // this.timeout = setTimeout(() => {
       return app.checkDuplicate(this.inputElement.value);
-      // }, CHECK_DELAY_TIME);
     },
     errorMessage: {
       misMatch: "5~20자의 영문 소문자, 숫자와 특수기호(_)(-) 만 사용 가능합니다.",

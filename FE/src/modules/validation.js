@@ -1,4 +1,5 @@
-import { inputFields, inputData } from "./formData.js";
+import inputFields from "./inputFields.js";
+import userData from "./userData.js";
 import { _q, toggleClass } from "./util.js";
 import { NUM_KEY_CODE_ZERO, NUM_KEY_CODE_NINE, TOGGLE_CLASS } from "./constants.js";
 
@@ -8,7 +9,7 @@ const generateErrorMessage = (element = null, message) => {
 };
 
 const setUserData = (key, value) => {
-  return inputData.set(key, value);
+  return userData.set(key, value);
 };
 
 const validateInputForms = event => {
@@ -51,5 +52,5 @@ signupForm.addEventListener("keypress", event => preventKeypressExceptNum(event)
 
 buttons.addEventListener("click", event => {
   event.preventDefault();
-  if (event.target === _q(".submit-btn")) console.log(inputData);
+  if (event.target === _q(".submit-btn")) console.log(userData);
 });

@@ -55,5 +55,3 @@ export const TOGGLE_CLASS = {
 export const NUM_KEY_CODE_ZERO = 48;
 
 export const NUM_KEY_CODE_NINE = 57;
-
-export const CHECK_DELAY_TIME = 300;
