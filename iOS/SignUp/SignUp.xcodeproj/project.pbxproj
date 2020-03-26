@@ -7,9 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6A87BCE3242BBEC900D73DBF /* IDTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A87BCE2242BBEC900D73DBF /* IDTextField.swift */; };
+		6A87BCE6242BCAAA00D73DBF /* IDTextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A87BCE5242BCAAA00D73DBF /* IDTextFieldDelegate.swift */; };
 		6AAC2FAE2428AE4E00076FD0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AAC2FAD2428AE4E00076FD0 /* AppDelegate.swift */; };
 		6AAC2FB02428AE4E00076FD0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AAC2FAF2428AE4E00076FD0 /* SceneDelegate.swift */; };
-		6AAC2FB22428AE4E00076FD0 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AAC2FB12428AE4E00076FD0 /* SignUpViewController.swift */; };
+		6AAC2FB22428AE4E00076FD0 /* UserInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AAC2FB12428AE4E00076FD0 /* UserInfoViewController.swift */; };
 		6AAC2FB52428AE4E00076FD0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6AAC2FB32428AE4E00076FD0 /* Main.storyboard */; };
 		6AAC2FB72428AE4F00076FD0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6AAC2FB62428AE4F00076FD0 /* Assets.xcassets */; };
 		6AAC2FBA2428AE4F00076FD0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6AAC2FB82428AE4F00076FD0 /* LaunchScreen.storyboard */; };
@@ -27,10 +29,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6A87BCE2242BBEC900D73DBF /* IDTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDTextField.swift; sourceTree = "<group>"; };
+		6A87BCE5242BCAAA00D73DBF /* IDTextFieldDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDTextFieldDelegate.swift; sourceTree = "<group>"; };
 		6AAC2FAA2428AE4E00076FD0 /* SignUp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SignUp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AAC2FAD2428AE4E00076FD0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6AAC2FAF2428AE4E00076FD0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		6AAC2FB12428AE4E00076FD0 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		6AAC2FB12428AE4E00076FD0 /* UserInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoViewController.swift; sourceTree = "<group>"; };
 		6AAC2FB42428AE4E00076FD0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6AAC2FB62428AE4F00076FD0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6AAC2FB92428AE4F00076FD0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -38,6 +42,7 @@
 		6AAC2FC02428AE4F00076FD0 /* SignUpTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SignUpTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AAC2FC42428AE4F00076FD0 /* SignUpTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpTests.swift; sourceTree = "<group>"; };
 		6AAC2FC62428AE4F00076FD0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6AE0ACFB242C82D800026EB1 /* SignUp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SignUp.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,9 +84,12 @@
 		6AAC2FAC2428AE4E00076FD0 /* SignUp */ = {
 			isa = PBXGroup;
 			children = (
+				6AE0ACFE242C869F00026EB1 /* View */,
+				6AE0ACFD242C869800026EB1 /* Model */,
+				6AE0ACFC242C869000026EB1 /* Controller */,
+				6AE0ACFB242C82D800026EB1 /* SignUp.entitlements */,
 				6AAC2FAD2428AE4E00076FD0 /* AppDelegate.swift */,
 				6AAC2FAF2428AE4E00076FD0 /* SceneDelegate.swift */,
-				6AAC2FB12428AE4E00076FD0 /* SignUpViewController.swift */,
 				6AAC2FB32428AE4E00076FD0 /* Main.storyboard */,
 				6AAC2FB62428AE4F00076FD0 /* Assets.xcassets */,
 				6AAC2FB82428AE4F00076FD0 /* LaunchScreen.storyboard */,
@@ -97,6 +105,30 @@
 				6AAC2FC62428AE4F00076FD0 /* Info.plist */,
 			);
 			path = SignUpTests;
+			sourceTree = "<group>";
+		};
+		6AE0ACFC242C869000026EB1 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				6AAC2FB12428AE4E00076FD0 /* UserInfoViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		6AE0ACFD242C869800026EB1 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				6A87BCE5242BCAAA00D73DBF /* IDTextFieldDelegate.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		6AE0ACFE242C869F00026EB1 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6A87BCE2242BBEC900D73DBF /* IDTextField.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -200,9 +232,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6AAC2FB22428AE4E00076FD0 /* SignUpViewController.swift in Sources */,
+				6AAC2FB22428AE4E00076FD0 /* UserInfoViewController.swift in Sources */,
 				6AAC2FAE2428AE4E00076FD0 /* AppDelegate.swift in Sources */,
 				6AAC2FB02428AE4E00076FD0 /* SceneDelegate.swift in Sources */,
+				6A87BCE6242BCAAA00D73DBF /* IDTextFieldDelegate.swift in Sources */,
+				6A87BCE3242BBEC900D73DBF /* IDTextField.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -362,6 +396,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = SignUp/SignUp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 93A6S4WHC4;
 				INFOPLIST_FILE = SignUp/Info.plist;
@@ -380,6 +415,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = SignUp/SignUp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 93A6S4WHC4;
 				INFOPLIST_FILE = SignUp/Info.plist;
