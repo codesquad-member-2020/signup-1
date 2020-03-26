@@ -51,10 +51,9 @@ public class ApiUserController {
     @PostMapping("/login")
     public boolean login(@RequestBody User loginUser, HttpSession session) {
         User user = userRepository.findByUserId(loginUser.getUserId()).orElseGet(User::new);
-
-        if (!user.matchPassword(loginUser))
+        if (!user.matchPassword(loginUser)) {
             return false;
-
+        }
         session.setAttribute(SESSION_USER_KEY, user);
         return true;
     }
@@ -68,12 +67,11 @@ public class ApiUserController {
 
     @GetMapping("/{id}")
     public User showPersonalInformation(@PathVariable String id, HttpSession session) {
-        User sessionedUser = (User)Optional.ofNullable(session.getAttribute(SESSION_USER_KEY)).orElseThrow(UnauthorizedException::new);
+        User sessionedUser = Optional.ofNullable((User)session.getAttribute(SESSION_USER_KEY)).orElseThrow(() -> new UnauthorizedException("접근 권한이 없습니다."));
         User requestedUser = userRepository.findById(id).orElseGet(User::new);
-
-        if (!sessionedUser.matchUser(requestedUser))
-            throw new ForbiddenException();
-
+        if (!sessionedUser.equals(requestedUser)) {
+            throw new ForbiddenException("로그인이 필요합니다.");
+        }
         return requestedUser;
     }
 }
