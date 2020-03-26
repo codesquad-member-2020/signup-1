@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.security.InvalidParameterException;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/users")
@@ -48,11 +47,7 @@ public class ApiUserController {
 
     @PostMapping("/login")
     public boolean login(@RequestBody User loginUser, HttpSession session) {
-        Optional<User> optionalUser = userRepository.findByUserId(loginUser.getUserId());
-        if (!optionalUser.isPresent())
-            return false;
-
-        User user = optionalUser.get();
+        User user = userRepository.findByUserId(loginUser.getUserId()).orElseGet(User::new);
         if (!user.matchPassword(loginUser))
             return false;
 
