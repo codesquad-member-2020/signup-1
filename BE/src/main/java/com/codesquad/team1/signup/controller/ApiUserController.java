@@ -4,6 +4,7 @@ import com.codesquad.team1.signup.Exception.ForbiddenException;
 import com.codesquad.team1.signup.Exception.UnauthorizedException;
 import com.codesquad.team1.signup.repository.User;
 import com.codesquad.team1.signup.repository.UserRepository;
+import com.codesquad.team1.signup.response.Result;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
@@ -26,18 +27,27 @@ public class ApiUserController {
     }
 
     @GetMapping("/duplicate/userId/{userId}")
-    public boolean isDuplicatedId(@PathVariable String userId) {
-        return userRepository.countByUserId(userId) > 0;
+    public Result isDuplicatedId(@PathVariable String userId) {
+        if (userRepository.countByUserId(userId) > 0) {
+            return Result.isSuccess();
+        }
+        return Result.isFail();
     }
 
     @GetMapping("/duplicate/email/{email}")
-    public boolean isDuplicatedEmail(@PathVariable String email) {
-        return userRepository.countByEmail(email) > 0;
+    public Result isDuplicatedEmail(@PathVariable String email) {
+        if (userRepository.countByEmail(email) > 0) {
+            return Result.isSuccess();
+        }
+        return Result.isFail();
     }
 
     @GetMapping("/duplicate/phone-number/{phoneNumber}")
-    public boolean isDuplicatedPhoneNumber(@PathVariable String phoneNumber) {
-        return userRepository.countByPhoneNumber(phoneNumber) > 0;
+    public Result isDuplicatedPhoneNumber(@PathVariable String phoneNumber) {
+        if (userRepository.countByPhoneNumber(phoneNumber) > 0) {
+            return Result.isSuccess();
+        }
+        return Result.isFail();
     }
 
     @PostMapping("/create")
@@ -49,20 +59,20 @@ public class ApiUserController {
     }
 
     @PostMapping("/login")
-    public boolean login(@RequestBody User loginUser, HttpSession session) {
+    public Result login(@RequestBody User loginUser, HttpSession session) {
         User user = userRepository.findByUserId(loginUser.getUserId()).orElseGet(User::new);
         if (!user.matchPassword(loginUser)) {
-            return false;
+            return Result.isFail();
         }
         session.setAttribute(SESSION_USER_KEY, user);
-        return true;
+        return Result.isSuccess();
     }
 
     @GetMapping("/logout")
-    public boolean logout(HttpSession session) {
+    public Result logout(HttpSession session) {
         session.removeAttribute(SESSION_USER_KEY);
         session.invalidate();
-        return true;
+        return Result.isSuccess();
     }
 
     @GetMapping("/{id}")
