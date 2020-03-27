@@ -1,5 +1,6 @@
-package com.codesquad.team1.signup.repository;
+package com.codesquad.team1.signup.domain.user;
 
+import com.codesquad.team1.signup.domain.interest.Interest;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.MappedCollection;
 import org.springframework.data.relational.core.mapping.Table;
@@ -9,13 +10,18 @@ import java.util.List;
 import java.util.Objects;
 import java.util.regex.Matcher;
 
-import static com.codesquad.team1.signup.constants.ValidationConstants.USER_EMAIL_VALIDATION_PATTERN;
-import static com.codesquad.team1.signup.constants.ValidationConstants.USER_ID_VALIDATION_PATTERN;
-import static com.codesquad.team1.signup.constants.ValidationConstants.USER_PASSWORD_VALIDATION_PATTERN;
-import static com.codesquad.team1.signup.constants.ValidationConstants.USER_PHONE_NUMBER_VALIDATION_PATTERN;
+import static com.codesquad.team1.signup.common.constants.ValidationConstants.USER_EMAIL_VALIDATION_PATTERN;
+import static com.codesquad.team1.signup.common.constants.ValidationConstants.USER_ID_VALIDATION_PATTERN;
+import static com.codesquad.team1.signup.common.constants.ValidationConstants.USER_PASSWORD_VALIDATION_PATTERN;
+import static com.codesquad.team1.signup.common.constants.ValidationConstants.USER_PHONE_NUMBER_VALIDATION_PATTERN;
 
 @Table("USERS")
 public class User {
+
+    enum Gender {
+        FEMALE,
+        MALE;
+    }
 
     @Id
     private int id;
