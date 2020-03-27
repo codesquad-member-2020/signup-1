@@ -1,0 +1,48 @@
+// Typography
+$sans-serif: apple-system, Helvetica, sans-serif;
+
+// Color
+$black: rgba(0, 0, 0, 0.87);
+$grey: rgba(0, 0, 0, 0.5);
+$placeholder-grey: rgba(0, 0, 0, 0.3);
+$light-grey: rgba(0, 0, 0, 0.12);
+$bg-grey: rgba(0, 0, 0, 0.05);
+$white: rgba(255, 255, 255, 1);
+$highlight: rgba(3, 199, 90, 1);
+$red: rgba(255, 0, 0, 1);
+
+// Size
+
+// Wrap
+$wrap-padding: 20px;
+$wrap-max-width: 500px;
+// Input
+$input-height: 60px;
+$input-gap: 10px;
+$input-padding: 14px;
+// Button
+$button-gap: 12px;
+// Chip
+$chip-height: 30px;
+$chip-gap: 4px;
+$chip-padding: 6px;
+$chip-border-radius: 4px;
+// Modal
+$modal-padding: 24px;
+$modal-gap: 16px;
+$modal-textbox-height: 400px;
+
+// Mixin
+@mixin appearance-none {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+@mixin darken-color($color) {
+  background-color: darken($color, 5%);
+}
+
+@mixin lighten-color($color) {
+  background-color: lighten($color, 10%);
+}

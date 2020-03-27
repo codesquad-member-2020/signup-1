@@ -1,0 +1,20 @@
+.pass {
+  color: $highlight;
+}
+
+.error {
+  color: $red;
+}
+
+body form .form-interest .focus {
+  border: 1px solid $highlight;
+}
+
+.hidden {
+  display: none;
+}
+
+.disabled {
+  pointer-events: none;
+  background-color: $grey;
+}

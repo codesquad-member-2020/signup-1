@@ -1,0 +1,199 @@
+html,
+body {
+  min-height: 100%;
+}
+
+h1,
+h2 {
+  font-weight: bold;
+}
+
+body {
+  padding: 0 $wrap-padding;
+  font-family: $sans-serif;
+  background-color: $bg-grey;
+  color: $black;
+  display: flex;
+  justify-content: center;
+}
+
+div.wrap {
+  width: 100%;
+  max-width: $wrap-max-width;
+  min-height: 100%;
+  header {
+    margin: {
+      top: 60px;
+      bottom: 40px;
+    }
+    font-size: 2.5rem;
+    color: $highlight;
+    text-align: center;
+  }
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 80px;
+  > div + div {
+    margin-top: $input-gap * 2;
+  }
+  label {
+    color: $grey;
+    font-weight: bold;
+  }
+  input,
+  select,
+  div.interest-wrap,
+  div.interest-chip {
+    width: 100%;
+    font-size: 1rem;
+    box-sizing: border-box;
+    border: 1px solid $light-grey;
+    background-color: $white;
+  }
+  input,
+  select {
+    height: $input-height;
+    padding: 0 $input-padding;
+    margin-top: $input-gap;
+    transition: border 0.2s ease;
+  }
+  input {
+    &:focus {
+      border: 1px solid $highlight;
+    }
+    &::placeholder {
+      color: $placeholder-grey;
+    }
+  }
+  select {
+    @include appearance-none();
+    border-radius: 0;
+  }
+  span.error-msg {
+    margin-top: 12px;
+    font-size: 0.875rem;
+    display: block;
+    height: 20px;
+  }
+}
+
+div.birthday-wrap {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $button-gap;
+  input,
+  div.month-select-wrap {
+    width: 100%;
+  }
+}
+
+div.month-select-wrap,
+div.gender-select-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+div.interest-wrap,
+div.interest-chip {
+  display: flex;
+  align-items: center;
+}
+
+div.interest-wrap {
+  flex-wrap: wrap;
+  align-content: space-between;
+  margin-top: $input-gap;
+  padding: calc(#{$input-padding} - #{$chip-gap});
+  transition: border 0.2s ease;
+  div.interest-chip {
+    width: auto;
+    background-color: $bg-grey;
+    border-radius: $chip-border-radius;
+    height: $chip-height;
+    margin: $chip-gap;
+    padding: 0 $chip-padding 0 8px;
+    span {
+      margin-right: 4px;
+      color: $grey;
+    }
+  }
+  input {
+    flex: 1 1 auto;
+    width: 30px;
+    float: right;
+    height: $chip-height;
+    margin: $chip-gap;
+    padding: 0;
+    border: transparent;
+    background-color: transparent;
+  }
+}
+
+div.form-terms {
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+  label {
+    margin-right: 8px;
+  }
+  input[type="checkbox"] {
+    width: auto;
+    height: auto;
+    zoom: 1.5;
+    margin: 0;
+    padding: 0;
+    transition: none;
+  }
+}
+
+div.btn-wrap {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $button-gap;
+}
+
+button {
+  cursor: pointer;
+  font-size: 1.25rem;
+  font-weight: bold;
+  height: $input-height;
+  border: none;
+  background-color: $highlight;
+  transition: background-color 0.2s ease;
+  color: $white;
+  &:hover {
+    @include darken-color($highlight);
+  }
+}
+
+a {
+  color: $black;
+  &:hover {
+    color: $highlight;
+  }
+}
+
+.material-icons {
+  opacity: 0.56;
+  &.md-18 {
+    font-size: 18px;
+  }
+  &.md-36 {
+    font-size: 32px;
+  }
+  &.expand-more {
+    pointer-events: none;
+    position: absolute;
+    transform: translateY(12%);
+    right: 10px;
+  }
+  &.close {
+    transform: translateY(-5%);
+    cursor: pointer;
+  }
+}
