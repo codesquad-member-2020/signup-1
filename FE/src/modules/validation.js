@@ -1,7 +1,7 @@
 import app from "./server.js";
 import userData from "./userData.js";
-import { inputFields, selectFields } from "./fields.js";
-import { _q, toggleClass } from "./util.js";
+import { inputFields, selectFields, interestField } from "./fields.js";
+import { toggleClass } from "./util.js";
 import { KEY_CODE_ZERO, KEY_CODE_NINE, TOGGLE_CLASS, PASS } from "./constants.js";
 
 const generateMessage = (element = null, message) => {
@@ -40,10 +40,10 @@ export const validateDuplicateId = event => {
       const { errorMessageElement } = userId;
       if (isValidatePassed(errorMessage)) {
         errorMessage = userId.passMessage;
-        setUserData(userId, userId.inputElement.value);
+        setUserData("userId", userId.inputElement.value);
         toggleClass(errorMessageElement, TOGGLE_CLASS.pass, TOGGLE_CLASS.error);
       } else {
-        setUserData(userId, null);
+        setUserData("userId", null);
         toggleClass(errorMessageElement, TOGGLE_CLASS.error, TOGGLE_CLASS.pass);
       }
       generateMessage(errorMessageElement, errorMessage);
