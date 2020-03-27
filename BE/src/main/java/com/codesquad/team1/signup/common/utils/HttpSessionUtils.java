@@ -12,7 +12,7 @@ public class HttpSessionUtils {
     private HttpSessionUtils() {}
 
     public static Optional<User> getLoginedUserFromSession(HttpSession session) {
-       return Optional.ofNullable((User)session.getAttribute(SESSION_LOGINED_USER));
+        return Optional.ofNullable((User) session.getAttribute(SESSION_LOGINED_USER));
     }
 
     public static void logout(HttpSession session) {
