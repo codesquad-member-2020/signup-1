@@ -1,4 +1,4 @@
-package com.codesquad.team1.signup.constants;
+package com.codesquad.team1.signup.common.constants;
 
 import java.util.regex.Pattern;
 
