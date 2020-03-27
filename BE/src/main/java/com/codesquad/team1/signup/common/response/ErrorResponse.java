@@ -1,4 +1,4 @@
-package com.codesquad.team1.signup.Exception;
+package com.codesquad.team1.signup.common.response;
 
 public class ErrorResponse {
 

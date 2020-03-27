@@ -1,4 +1,4 @@
-package com.codesquad.team1.signup.response;
+package com.codesquad.team1.signup.common.response;
 
 public class ValidationResponse {
 
