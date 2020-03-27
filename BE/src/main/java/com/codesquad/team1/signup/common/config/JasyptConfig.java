@@ -1,4 +1,4 @@
-package com.codesquad.team1.signup.config;
+package com.codesquad.team1.signup.common.config;
 
 import org.jasypt.encryption.StringEncryptor;
 import org.jasypt.encryption.pbe.PooledPBEStringEncryptor;

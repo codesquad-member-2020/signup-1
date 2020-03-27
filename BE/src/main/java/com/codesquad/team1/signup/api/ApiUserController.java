@@ -1,4 +1,4 @@
-package com.codesquad.team1.signup.web.api;
+package com.codesquad.team1.signup.api;
 
 import com.codesquad.team1.signup.common.constants.ErrorMessages;
 import com.codesquad.team1.signup.common.response.ErrorResponse;
