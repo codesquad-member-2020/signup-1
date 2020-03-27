@@ -1,4 +1,5 @@
 import { PATTERN, FORM_ID, LIMITED_LENGTH, ERROR_MSG_ID, ERROR_MESSAGE, PASS_MESSAGE, PASS } from "./constants.js";
+import { getSizeofChip } from "./interestChip.js";
 import { _q, daysInMonth } from "./util.js";
 
 export const selectFields = {
@@ -162,6 +163,7 @@ export const inputFields = {
   interest: {
     inputElement: _q(FORM_ID.interest),
     selectErrorMessage() {
+      if (getSizeofChip() < LIMITED_LENGTH.interest) return this.errorMessage;
       return PASS;
     },
     errorMessageElement: _q(ERROR_MSG_ID.interest),
