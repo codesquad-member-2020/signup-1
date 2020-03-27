@@ -1,12 +1,43 @@
 # 회원가입 - BE
 
 ## Feature
-+ feature/be/user
-    + 회원과 관련된 User, UserRepository 클래스 생성
-    + USERS 테이블의 Enum 타입에 맵핑하기 위한 Gender enum 생성
-    + 간단한 DB 연결 테스트
-+ feature/be/duplicatedId
-    + 중복 ID 조회 API 기능 구현
+
+### [API Docs](https://documenter.getpostman.com/view/10834855/SzYUZg9T?version=latest)
+
+#### 중복 체크 기능
+
+- **GET** `api/users/duplicate/userId/{userId}`
+  + 해당 요청과 함께 URL로 전달된 ID가 존재하는지 여부를 ```ValidationResponse``` 객체로 응답합니다.
+- **GET** `api/users/duplicate/email/{email}` 
+  - 해당 요청과 함께 URL로 전달된 이메일이 존재하는지 여부를 ```ValidationResponse``` 객체로 응답합니다.
+- **GET** `api/users/duplicate/phone-number/{phoneNumber}`
+  + 해당 요청과 함께 URL로 전달된 핸드폰 번호가 존재하는지 여부를 ```ValidationResponse``` 객체로 응답합니다.
+- ```ValidationResponse```
+  - 중복 체크에 대한 JSON 형태의 응답 객체입니다.
+  - key-value 형태는 [API Docs 참고](https://documenter.getpostman.com/view/10834855/SzYUZg9T?version=latest)
+
+#### 로그인, 로그아웃 기능
+
++ **POST** ```/api/users/login``` 
+  + 해당 요청과 함께 JSON 형태로 전달된 데이터가 1) DB에 존재하는지, 2) 비밀번호가 일치하는지 검사한 뒤, 세션에 회원 정보를 저장합니다.
++ **POST** ```/api/users/logout```
+  + 해당 요청과 함께 현재 세션에 저장되어 있는 회원 정보를 제거합니다.
++ ```HttpSessionUtils```
+  + 로그인, 로그아웃 기능과 관련된 세션 작업을 처리하는 Util 클래스를 정의했습니다.
+
+#### 개인 정보 조회
+
++ **GET** ```/api/users/{id}```
+  + 해당 요청과 함께 URL로 전달된 User 시퀀스번호에 해당되는 회원 정보를 반환합니다.
+  + 이후 프로젝트에서는 DTO 클래스를 활용하는 방법도 고려해봐야 할 것 같습니다.
+
+#### 에러 응답
+
++ ```ErrorResponse``` 
+  + 커스텀 예외 처리 클래스 ```UnauthorizedException```, ```ForbiddenException```, ```UserCreateParameterInvalidException```  예외가 발생하는 경우 반환하는 응답 객체입니다.
+  + key-value 형태는 [API Docs 참고](https://documenter.getpostman.com/view/10834855/SzYUZg9T?version=latest)
++ 서버에 대한 예외 발생 응답 객체를 통일하지 못했습니다. ```ControllerAdvice``` 로 전역으로 발생하는 예외 상황에 대응하는 것, 응답 객체를 통일하는 것을 고려해봐야 합니다.
+
 ### User 관련 기능
 
 #### Validation 기능
