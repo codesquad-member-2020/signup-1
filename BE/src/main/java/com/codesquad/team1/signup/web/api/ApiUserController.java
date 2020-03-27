@@ -1,11 +1,13 @@
-package com.codesquad.team1.signup.controller;
+package com.codesquad.team1.signup.web.api;
 
-import com.codesquad.team1.signup.Exception.ErrorResponse;
-import com.codesquad.team1.signup.Exception.ForbiddenException;
-import com.codesquad.team1.signup.Exception.UnauthorizedException;
-import com.codesquad.team1.signup.repository.User;
-import com.codesquad.team1.signup.repository.UserRepository;
-import com.codesquad.team1.signup.response.ValidationResponse;
+import com.codesquad.team1.signup.common.constants.ErrorMessages;
+import com.codesquad.team1.signup.common.response.ErrorResponse;
+import com.codesquad.team1.signup.common.exception.ForbiddenException;
+import com.codesquad.team1.signup.common.exception.UnauthorizedException;
+import com.codesquad.team1.signup.common.utils.HttpSessionUtils;
+import com.codesquad.team1.signup.domain.user.User;
+import com.codesquad.team1.signup.domain.user.UserRepository;
+import com.codesquad.team1.signup.common.response.ValidationResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -14,14 +16,12 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.security.InvalidParameterException;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/users")
 public class ApiUserController {
 
     private static final Logger log = LoggerFactory.getLogger(ApiUserController.class);
-    private static final String SESSION_USER_KEY = "sessionedUser";
 
     private UserRepository userRepository;
 
@@ -59,7 +59,7 @@ public class ApiUserController {
         if (user.validate()) {
             return userRepository.save(user);
         }
-        throw new InvalidParameterException("Validation을 통과하지 못한 값 입니다.");
+        throw new InvalidParameterException(ErrorMessages.INVALID_PARAMETER);
     }
 
     @PostMapping("/login")
@@ -68,23 +68,22 @@ public class ApiUserController {
         if (!user.matchPassword(loginUser)) {
             return ValidationResponse.isFail();
         }
-        session.setAttribute(SESSION_USER_KEY, user);
+        session.setAttribute(HttpSessionUtils.SESSION_LOGINED_USER, user);
         return ValidationResponse.isSuccess();
     }
 
     @PostMapping("/logout")
     public ValidationResponse logout(HttpSession session) {
-        session.removeAttribute(SESSION_USER_KEY);
-        session.invalidate();
+        HttpSessionUtils.logout(session);
         return ValidationResponse.isSuccess();
     }
 
     @GetMapping("/{id}")
     public User showPersonalInformation(@PathVariable String id, HttpSession session) {
-        User sessionedUser = Optional.ofNullable((User)session.getAttribute(SESSION_USER_KEY)).orElseThrow(() -> new UnauthorizedException("로그인이 필요합니다."));
+        User sessionUser = HttpSessionUtils.getLoginedUserFromSession(session).orElseThrow(() -> new UnauthorizedException(ErrorMessages.UNAUTHORIZED));
         User requestedUser = userRepository.findById(id).orElseGet(User::new);
-        if (!sessionedUser.equals(requestedUser)) {
-            throw new ForbiddenException("접근 권한이 없습니다.");
+        if (!sessionUser.equals(requestedUser)) {
+            throw new ForbiddenException(ErrorMessages.FORBIDDEN);
         }
         return requestedUser;
     }
@@ -97,5 +96,10 @@ public class ApiUserController {
     @ExceptionHandler(ForbiddenException.class)
     public ErrorResponse handleForbiddenException(ForbiddenException e) {
         return new ErrorResponse(e.getMessage(), HttpStatus.FORBIDDEN.value());
+    }
+
+    @ExceptionHandler(InvalidParameterException.class)
+    public ErrorResponse handleInvalidParameterException(InvalidParameterException e) {
+        return new ErrorResponse(e.getMessage(), HttpStatus.UNPROCESSABLE_ENTITY.value());
     }
 }
