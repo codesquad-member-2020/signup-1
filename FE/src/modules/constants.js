@@ -18,6 +18,7 @@ export const LIMITED_LENGTH = {
   year: 4,
   age_min: 15,
   age_max: 99,
+  interest: 3,
 };
 
 export const FORM_ID = {
