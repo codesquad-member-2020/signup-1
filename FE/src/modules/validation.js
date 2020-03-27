@@ -1,5 +1,6 @@
-import { inputFields, selectFields } from "./fields.js";
+import app from "./server.js";
 import userData from "./userData.js";
+import { inputFields, selectFields } from "./fields.js";
 import { _q, toggleClass } from "./util.js";
 import { KEY_CODE_ZERO, KEY_CODE_NINE, TOGGLE_CLASS, PASS } from "./constants.js";
 
@@ -16,18 +17,38 @@ export const validateInputForms = event => {
     const currentField = inputFields[field];
     if (event.target === currentField.inputElement) {
       let errorMessage = currentField.selectErrorMessage();
-      const messageElement = currentField.errorMessageElement;
+      const { errorMessageElement } = currentField;
       if (isValidatePassed(errorMessage)) {
         errorMessage = currentField.passMessage;
         setUserData(field, currentField.inputElement.value);
-        toggleClass(messageElement, TOGGLE_CLASS.pass, TOGGLE_CLASS.error);
+        toggleClass(errorMessageElement, TOGGLE_CLASS.pass, TOGGLE_CLASS.error);
       } else {
         setUserData(field, null);
-        toggleClass(messageElement, TOGGLE_CLASS.error, TOGGLE_CLASS.pass);
+        toggleClass(errorMessageElement, TOGGLE_CLASS.error, TOGGLE_CLASS.pass);
       }
-      generateMessage(messageElement, errorMessage);
+      generateMessage(errorMessageElement, errorMessage);
     }
   });
+};
+
+export const validateDuplicateId = event => {
+  const { userId } = inputFields;
+  if (event.target === userId.inputElement) {
+    const { value } = userId.inputElement;
+    app.fetchData(value).then(response => {
+      let errorMessage = userId.selectErrorMessage(response.valid);
+      const { errorMessageElement } = userId;
+      if (isValidatePassed(errorMessage)) {
+        errorMessage = userId.passMessage;
+        setUserData(userId, userId.inputElement.value);
+        toggleClass(errorMessageElement, TOGGLE_CLASS.pass, TOGGLE_CLASS.error);
+      } else {
+        setUserData(userId, null);
+        toggleClass(errorMessageElement, TOGGLE_CLASS.error, TOGGLE_CLASS.pass);
+      }
+      generateMessage(errorMessageElement, errorMessage);
+    });
+  }
 };
 
 export const validateSelectForms = event => {

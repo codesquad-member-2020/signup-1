@@ -4,8 +4,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   mode: "development",
-  entry: { index: ["babel-polyfill", "./src/signup.js"] },
-  // signin: "./src/signin.js", home: "./src/home.js" },
+  entry: { index: "./src/signup.js", signin: "./src/signin.js", home: "./src/home.js" },
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "dist/[name].bundle.js",
@@ -17,16 +16,16 @@ module.exports = {
       chunks: ["index"],
       template: "./src/signup.html",
     }),
-    // new HtmlWebpackPlugin({
-    //   filename: "signin.html",
-    //   chunks: ["signin"],
-    //   template: "./src/signin.html",
-    // }),
-    // new HtmlWebpackPlugin({
-    //   filename: "home.html",
-    //   chunks: ["home"],
-    //   template: "./src/home.html",
-    // }),
+    new HtmlWebpackPlugin({
+      filename: "signin.html",
+      chunks: ["signin"],
+      template: "./src/signin.html",
+    }),
+    new HtmlWebpackPlugin({
+      filename: "home.html",
+      chunks: ["home"],
+      template: "./src/home.html",
+    }),
   ],
   devServer: {
     contentBase: path.join(__dirname, "./dist/"),
