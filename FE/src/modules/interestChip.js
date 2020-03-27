@@ -33,7 +33,7 @@ const renderChips = () => {
 };
 
 export const generateChips = event => {
-  const interest = _q(FORM_ID.userId);
+  const interest = _q(FORM_ID.interest);
   if (event.target === interest) {
     if (event.keyCode === KEY_CODE_COMMA) {
       event.preventDefault();
