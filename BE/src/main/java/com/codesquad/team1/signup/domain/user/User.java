@@ -5,6 +5,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.MappedCollection;
 import org.springframework.data.relational.core.mapping.Table;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
@@ -16,7 +17,7 @@ import static com.codesquad.team1.signup.common.constants.ValidationConstants.US
 import static com.codesquad.team1.signup.common.constants.ValidationConstants.USER_PHONE_NUMBER_VALIDATION_PATTERN;
 
 @Table("USERS")
-public class User {
+public class User implements Serializable {
 
     enum Gender {
         FEMALE,
