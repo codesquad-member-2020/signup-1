@@ -1,6 +1,7 @@
 package com.codesquad.team1.signup.api;
 
 import com.codesquad.team1.signup.common.constants.ErrorMessages;
+import com.codesquad.team1.signup.common.exception.UserCreateParameterInvalidException;
 import com.codesquad.team1.signup.common.response.ErrorResponse;
 import com.codesquad.team1.signup.common.exception.ForbiddenException;
 import com.codesquad.team1.signup.common.exception.UnauthorizedException;
@@ -59,7 +60,7 @@ public class ApiUserController {
         if (user.validate()) {
             return userRepository.save(user);
         }
-        throw new InvalidParameterException(ErrorMessages.INVALID_PARAMETER);
+        throw new UserCreateParameterInvalidException(ErrorMessages.USER_CREATE_PARAMETER_INVALID);
     }
 
     @PostMapping("/login")
