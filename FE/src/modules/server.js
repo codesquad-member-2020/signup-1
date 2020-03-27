@@ -2,7 +2,7 @@ import userData from "./userData.js";
 
 const fetch = require("node-fetch");
 
-const URL = "https://test-codesquad-team1-sign-up.herokuapp.com/api/";
+const URL = "https://codesquad-team1-sign-up.herokuapp.com/api/";
 
 export default {
   fetchData: value => {
