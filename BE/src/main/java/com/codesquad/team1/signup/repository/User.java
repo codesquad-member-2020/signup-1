@@ -28,7 +28,7 @@ public class User {
     private String email;
     private String phoneNumber;
 
-    @MappedCollection(idColumn = "uid", keyColumn = "id")
+    @MappedCollection(idColumn = "uid", keyColumn = "interest_key")
     private List<Interest> interests;
 
     public int getId() {
