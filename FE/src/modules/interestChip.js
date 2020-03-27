@@ -1,10 +1,9 @@
 import { _q, _qa, pipe, addClass } from "./util.js";
-import { inputFields } from "./fields.js";
-import { KEY_CODE_BACKSPACE, KEY_CODE_COMMA, COMMA, CHIP_ELEMENT_CLASS_NAME, CHIP_ELEMENT_HTML } from "./constants.js";
+import { FORM_ID, KEY_CODE_BACKSPACE, KEY_CODE_COMMA, COMMA, CHIP_ELEMENT_CLASS_NAME, CHIP_ELEMENT_HTML } from "./constants.js";
 
 const chips = new Set();
 export const getSizeofChip = () => chips.size;
-const getChip = () => chips;
+export const getChip = () => chips;
 const addChip = str => chips.add(str);
 const deleteChip = str => chips.delete(str);
 const clearChip = () => chips.clear();
@@ -34,7 +33,7 @@ const renderChips = () => {
 };
 
 export const generateChips = event => {
-  const interest = inputFields.interest.inputElement;
+  const interest = _q(FORM_ID.userId);
   if (event.target === interest) {
     if (event.keyCode === KEY_CODE_COMMA) {
       event.preventDefault();
