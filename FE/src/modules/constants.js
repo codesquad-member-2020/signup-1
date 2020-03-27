@@ -21,6 +21,8 @@ export const LIMITED_LENGTH = {
 };
 
 export const FORM_ID = {
+  form: "form",
+  buttons: ".btn-wrap",
   userId: "#userId",
   password: "#password",
   checkPassword: "#check-password",
@@ -79,8 +81,24 @@ export const PASS_MESSAGE = {
 
 export const PASS = "";
 
+export const COMMA = ",";
+
 export const KEY_CODE_ZERO = 48;
 
 export const KEY_CODE_NINE = 57;
 
 export const KEY_CODE_COMMA = 188;
+
+export const KEY_CODE_BACKSPACE = 8;
+
+export const CHIP_ELEMENT_CLASS_NAME = {
+  wrap: "interest-wrap",
+  div: "interest-chip",
+  icon: "material-icons md-18 close",
+  iconName: "close",
+};
+
+export const CHIP_ELEMENT_HTML = value => `<div class="${CHIP_ELEMENT_CLASS_NAME.div}">
+      <span>${value}</span>
+      <i class="${CHIP_ELEMENT_CLASS_NAME.icon}">${CHIP_ELEMENT_CLASS_NAME.iconName}</i>
+      </div>`;

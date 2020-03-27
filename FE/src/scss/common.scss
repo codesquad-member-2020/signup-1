@@ -124,7 +124,8 @@ div.interest-wrap {
   }
   input {
     flex: 1 1 auto;
-    width: 100px;
+    width: 30px;
+    float: right;
     height: $chip-height;
     margin: $chip-gap;
     padding: 0;
