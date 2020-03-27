@@ -77,7 +77,7 @@ export const PASS_MESSAGE = {
   checkPassword: "비밀번호가 일치합니다.",
 };
 
-export const PASS = null;
+export const PASS = "";
 
 export const KEY_CODE_ZERO = 48;
 

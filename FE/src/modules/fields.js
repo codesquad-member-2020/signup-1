@@ -1,4 +1,3 @@
-import app from "./server.js";
 import { PATTERN, FORM_ID, LIMITED_LENGTH, ERROR_MSG_ID, ERROR_MESSAGE, PASS_MESSAGE, PASS } from "./constants.js";
 import { _q, daysInMonth } from "./util.js";
 
@@ -20,19 +19,12 @@ export const selectFields = {
 export const inputFields = {
   userId: {
     inputElement: _q(FORM_ID.userId),
-    async selectErrorMessage() {
+    selectErrorMessage(valid = null) {
       if (!this.isFieldValid()) return this.errorMessage.misMatch;
-      const isDuplicate = await app.fetchData(this.inputElement.value);
-      if (isDuplicate.valid) return this.errorMessage.duplicate;
-      console.log(isDuplicate.valid);
+      if (valid === null) return null;
+      if (valid) return this.errorMessage.duplicate;
       return PASS;
     },
-    // async isDuplicate() {
-    //   const isDuplicate = await app.fetchData(this.inputElement.value);
-    //   console.log(isDuplicate, typeof isDuplicate, isDuplicate.valid);
-    //   console.log("is Await?", this.inputElement.value);
-    //   return isDuplicate.valid;
-    // },
     isFieldValid() {
       const userId = this.inputElement.value;
       const userIdRegex = PATTERN.userId;
@@ -77,9 +69,10 @@ export const inputFields = {
   checkPassword: {
     inputElement: _q(FORM_ID.checkPassword),
     isFieldValid() {
-      const password = _q(FORM_ID.password).value;
+      const password = inputFields.password.inputElement.value;
+      const passwordErrorMessage = inputFields.password.selectErrorMessage();
       const checkPassword = this.inputElement.value;
-      return password === checkPassword;
+      return passwordErrorMessage === PASS && password === checkPassword;
     },
     selectErrorMessage() {
       if (!this.isFieldValid()) return this.errorMessage;
