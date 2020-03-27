@@ -1,4 +1,4 @@
-package com.codesquad.team1.signup.web.controller;
+package com.codesquad.team1.signup.web;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
